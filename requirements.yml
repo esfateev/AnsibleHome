@@ -1,0 +1,7 @@
+---
+- name: arillso.motd
+  version: 1.4.0
+- name: rofrantz.duckdns
+- name: mawalu.wireguard_private_networking
+- name: hispanico.nginx-revproxy
+#- name: coopdevs.certbot_nginx

@@ -1,0 +1,14 @@
+tests/test.yml
+site
+.vagrant
+#roles
+*.retry
+*.log
+*.ini
+
+# Vim
+[._]sw[a-p]
+
+# Session
+Session.vim
+group_vars/sensitive.yml

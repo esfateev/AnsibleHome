@@ -1,0 +1,26 @@
+- name: Pi-hole Docker Container
+  docker_container:
+    name: pihole
+    image: pihole/pihole
+    pull: true
+    ports:
+      - "{{ pihole_dns_tcp }}:53/tcp"
+      - "{{ pihole_dns_udp }}:53/udp"
+      - "{{ pihole_web }}:8212/tcp"
+
+    volumes:
+      - "{{ pihole_data_directory }}:/etc/pihole/"
+
+    pid_mode: host
+#    network_mode: host
+    env:
+      TZ: "{{ ansible_nas_timezone }}"
+      ServerIP: "{{ pihole_ServerIP }}"
+      WEB_PORT: "{{ pihole_web }}"
+    restart_policy: unless-stopped
+    memory: 1g
+    labels:
+      traefik.backend: "pihole"
+      traefik.frontend.rule: "Host:pihole.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ pihole_available_externally }}"
+      traefik.port: "8212"

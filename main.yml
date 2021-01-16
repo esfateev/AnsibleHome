@@ -1,0 +1,177 @@
+---
+- hosts: all
+  gather_facts: yes
+
+  pre_tasks:
+    - import_tasks: tasks/users.yml
+      tags: users
+
+  tasks:
+  - debug: var=ansible_default_ipv4 verbosity=0
+  - import_tasks: tasks/general.yml
+    tags: general
+
+    # - hosts: vps
+#   roles:
+#     - role: roles/rofrantz.duckdns
+#     - role: roles/hispanico.nginx-revproxy
+#   tasks:
+#   - import_tasks: tasks/vps.yml
+#     tags: vps
+#   vars:
+#     nginx_revproxy_sites:
+#       changeme.duckdns.org:
+#         domains:
+#           - changeme.duckdns.org
+#         upstreams:
+#           - { backend_address: 192.168.1.20, backend_port: 443 }
+#         letsencrypt: false
+#         letsencrypt_email: 'mail@gmail.co'
+
+#       changeme.duckdns.org:
+#         domains:
+#           - changeme.duckdns.org
+#         upstreams:
+#           - { backend_address: 192.168.1.1, backend_port: 443 }
+#         letsencrypt: false
+#         letsencrypt_email: 'mail@gmail.co'
+
+- hosts: docker
+  tasks:
+  - name: Install Docker
+    import_tasks: tasks/docker.yml
+    tags: docker
+
+  - import_tasks: tasks/portainer.yml
+    when: (portainer_enabled | default(False))
+    tags: portainer
+
+  - import_tasks: tasks/watchtower.yml
+    when: (watchtower_enabled | default(False))
+    tags: watchtower
+
+  - import_tasks: tasks/traefik.yml
+    when: (traefik_enabled | default(False))
+    tags: traefik
+
+  - import_tasks: tasks/pihole.yml
+    when: (pihole_enabled | default(False))
+    tags: pihole
+
+  - import_tasks: tasks/stats.yml
+    when: (stats_enabled | default(False))
+    tags: stats
+
+  - import_tasks: tasks/heimdall.yml
+    when: (heimdall_enabled | default(False))
+    tags: heimdall
+
+  - import_tasks: tasks/sabnzbd.yml
+    when: (sabnzbd_enabled | default(False))
+    tags: sabnzbd
+
+  - import_tasks: tasks/organizr.yml
+    when: (organizr_enabled | default(False))
+    tags: organizr
+
+  - import_tasks: tasks/wiki.yml
+    when: (wiki_enabled | default(False))
+    tags: wiki
+
+  - import_tasks: tasks/homeassistant.yml
+    when: (homeassistant_enabled | default(False))
+    tags: homeassistant
+
+  - import_tasks: tasks/mosquitto.yml
+    when: (mosquitto_enabled | default(False))
+    tags: mosquitto
+
+  - import_tasks: tasks/plex.yml
+    when: (plex_enabled | default(False))
+    tags: plex
+
+  - import_tasks: tasks/tautulli.yml
+    when: (tautulli_enabled | default(False))
+    tags: tautulli
+
+  - import_tasks: tasks/transmission.yml
+    when: (transmission_enabled | default(False))
+    tags: transmission
+
+  - import_tasks: tasks/transmission_with_openvpn.yml
+    when: (transmission_with_openvpn_enabled | default(False))
+    tags: transmission
+
+  - import_tasks: tasks/duplicati.yml
+    when: (duplicati_enabled | default(False))
+    tags: duplicati
+
+  - import_tasks: tasks/calibre.yml
+    when: (calibre_enabled | default(False))
+    tags: calibre
+
+  - import_tasks: tasks/bazarr.yml
+    when: (bazarr_enabled | default(False))
+    tags: bazarr
+
+  - import_tasks: tasks/lidarr.yml
+    when: (lidarr_enabled | default(False))
+    tags: lidarr
+
+  - import_tasks: tasks/sonarr.yml
+    when: (sonarr_enabled | default(False))
+    tags: sonarr
+
+  - import_tasks: tasks/radarr.yml
+    when: (radarr_enabled | default(False))
+    tags: radarr
+
+  - import_tasks: tasks/jellyfin.yml
+    when: (jellyfin_enabled | default(False))
+    tags: jellyfin
+  
+  - import_tasks: tasks/glances.yml
+    when: (glances_enabled | default(False))
+    tags: glances
+
+  - import_tasks: tasks/krusader.yml
+    when: (krusader_enabled | default(False))
+    tags: krusader
+##############  DevOPS #################
+#######################################
+
+#  - import_tasks: tasks/devops/gitea.yml
+#    when: (gitea_enabled | default(False))
+#    tags: gitea
+
+  - import_tasks: tasks/devops/gitea.yml
+    when: (gitea_enabled | default(False))
+    tags: gitea
+
+
+##############  Music #################
+#######################################
+
+#  - import_tasks: tasks/music/airsonic-advanced.yml
+#    when: (airsonic_adv_enabled | default(False))
+#    tags: airsonic-advanced
+
+#  - import_tasks: tasks/music/airsonic.yml
+#    when: (airsonic_enabled | default(False))
+#    tags: airsonic
+
+  - import_tasks: tasks/music/jackett.yml
+    when: (jackett_enabled | default(False))
+    tags: jackett
+
+  - import_tasks: tasks/music/navidrome.yml
+    when: (navidrome_enabled | default(False))
+    tags: navidrome
+    
+  - import_tasks: tasks/music/headphones.yml
+    when: (headphones_enabled | default(False))
+    tags: headphones
+
+  - import_tasks: tasks/music/musicbrainz.yml
+    when: (musicbrainz_enabled | default(False))
+    tags: musicbrainz

@@ -1,0 +1,28 @@
+---
+- name: Create Gitea Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+  with_items:
+    - "{{ keycloak_data_directory }}/keycloak"
+
+- name: Create KeyCloak container
+  docker_container:
+    name: keycloak
+    image: jboss/keycloak:latest
+    pull: true
+    volumes:
+      - "{{ gitea_data_directory }}/gitea:/data:rw"
+    ports:
+      - "{{ sso_port }}:8080"
+    env:
+      KEYCLOAK_USER: "admin"
+      KEYCLOAK_PASSWORD: "admin"
+    restart_policy: unless-stopped
+    memory: 1g
+    labels:
+      traefik.backend: "keycloak"
+      traefik.frontend.rule: "Host:sso.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ sso_available_externally }}"
+      traefik.port: "443"

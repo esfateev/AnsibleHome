@@ -1,0 +1,31 @@
+---
+- name: Create sabnzbd Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ sabnzbd_data_directory }}"
+
+- name: sabnzbd
+  docker_container:
+    name: sabnzbd
+    image: linuxserver/sabnzbd
+    pull: true
+    volumes:
+#      - "{{ sabnzbd_incomplite_download_directory }}://incomplete-downloads:rw"
+      - "{{ sabnzbd_download_directory }}:/downloads:rw"
+      - "{{ sabnzbd_data_directory }}:/config:rw"
+    ports:
+      - "{{ sabnzbd_port }}:8080"
+      - "{{ sabnzbd_port2 }}:9090"
+    env:
+      TZ: "{{ ansible_nas_timezone }}"
+      PUID: "{{ sabnzbd_user_id }}"
+      PGID: "{{ sabnzbd_group_id }}"
+    restart_policy: unless-stopped
+    memory: 1g
+    labels:
+      traefik.backend: "sabnzbd"
+      traefik.frontend.rule: "Host:sabnzbd.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ sabnzbd_available_externally }}"
+      traefik.port: "8080"

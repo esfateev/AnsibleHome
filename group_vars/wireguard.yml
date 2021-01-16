@@ -1,0 +1,25 @@
+###################################
+############ WIREGUARD ############
+###################################
+
+wireguard_port: "5888" # the port to use for server to server connections
+wireguard_path: "/etc/wireguard" # location of all wireguard configurations
+
+wireguard_network_name: "private" # the name to use for the config file and wg-quick
+
+wireguard_mtu: 1500 # Optionally a MTU to set in the wg-quick file. Not set by default. Can also be set per host
+
+client_vpn_ip: "" # if set an additional wireguard config file will be generated at the specified path on localhost
+client_wireguard_path: "~/wg.conf" # path on localhost to write client config, if client_vpn_ip is set 
+
+# a list of additional peers that will be added to each server
+wireguard_additional_peers:
+  - comment: test-phone
+    ip: 10.0.0.2/32
+    key: CHANGEME
+  - comment: test-tablet
+    ip: 10.0.0.3/32
+    key: CHANGEME
+    
+wireguard_post_up: "iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE"
+wireguard_post_down: "iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE"

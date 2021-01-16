@@ -1,0 +1,37 @@
+- name: DB Docker Container
+  docker_container:
+    name: wiki-db
+    image: postgres:11-alpine
+    pull: true
+    volumes:
+      - "{{ wikidb_config_directory }}:/var/lib/postgresql/datadb"
+    ports:
+      - "{{ wiki_db_port }}:5432"
+    env:
+      POSTGRES_USER: "wikijs"
+      POSTGRES_PASSWORD: "wikijsrocks"
+      POSTGRES_DB: "wiki"
+    restart_policy: unless-stopped
+    memory: 1g
+
+- name: Wiki Docker Container
+  docker_container:
+    name: wiki
+    image: requarks/wiki
+    pull: true
+    ports:
+      - "{{ wiki_port }}:3000"
+    env:
+      DB_TYPE: "postgres"
+      DB_HOST: "wiki-db"
+      DB_PORT: "5432"
+      DB_USER: "wikijs"
+      DB_PASS: "wikijsrocks"
+      DB_NAME: "wiki"
+    restart_policy: unless-stopped
+    memory: 1g
+    labels:
+      traefik.backend: "wiki"
+      traefik.frontend.rule: "Host:wiki.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ wiki_available_externally }}"
+      traefik.port: "3000"

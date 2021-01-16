@@ -1,0 +1,27 @@
+---
+- name: Create headphones Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ headphones_data_directory }}"
+
+- name: headphones
+  docker_container:
+    name: headphones
+    image: linuxserver/headphones:latest
+    volumes:
+      - "{{ headphones_data_directory }}:/config:rw"
+      - "{{ headphones_torrents_root }}:/downloads"
+      - "{{ headphones_music_folder }}:/music"
+
+    ports:
+      - "{{ headphones_port }}:8181"
+    env:
+      TZ: "{{ ansible_nas_timezone }}"
+    restart_policy: unless-stopped
+    labels:
+      traefik.backend: "headphones"
+      traefik.frontend.rule: "Host:headphones.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ headphones_available_externally }}"
+      traefik.port: "8181"

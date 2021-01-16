@@ -1,0 +1,29 @@
+---
+- name: Create Airsonic-advanced Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    # mode: 0755
+  with_items:
+    - "{{ airsonic_adv_data_directory }}/data"
+    - "{{ airsonic_adv_data_directory }}/playlists"
+
+- name: Airsonic Docker Container
+  docker_container:
+    name: airsonic-advanced
+    image: airsonicadvanced/airsonic-advanced:latest
+    pull: true
+    volumes:
+      - "{{ airsonic_adv_data_directory }}/data:/var/airsonic/rw"
+      - "{{ airsonic_adv_data_directory }}/playlists:/var/playlists:rw"
+      - "{{ airsonic_music_directory }}:/var/music:rw"
+      - "{{ airsonic_adv_podcasts_directory }}:/var/podcasts:rw"
+    ports:
+      - "{{ airsonic_adv_port }}:4040"
+    restart_policy: unless-stopped
+    memory: 1g
+    labels:
+      traefik.backend: "airsonic-advanced"
+      traefik.frontend.rule: "Host:music2.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ airsonic_adv_available_externally }}"
+      traefik.port: "4041"

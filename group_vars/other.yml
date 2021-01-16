@@ -1,0 +1,305 @@
+###
+### PyTivo
+###
+pytivo_available_externally: "false"
+pytivo_config_directory: "{{ docker_home }}/pytivo/config"
+pytivo_movies_directory: "{{ movies_root }}"
+pytivo_tv_directory: "{{ tv_root }}"
+pytivo_photos_directory: "{{ photos_root }}"
+pytivo_music_directory: "{{ music_root }}"
+pytivo_podcasts_directory: "{{ podcasts_root }}"
+pytivo_user_id: "0"
+pytivo_group_id: "0"
+
+###
+### Homebridge
+###
+homebridge_available_externally: "false"
+homebridge_config_directory: "{{ docker_home }}/homebridge/config"
+homebridge_user_id: "0"
+homebridge_group_id: "0"
+homebridge_port: "8087"
+
+###
+### Emby
+###
+# If you're paranoid, set permissions to "ro" so Emby won't ever be able to
+# delete your files
+emby_available_externally: "false"
+emby_config_directory: "{{ docker_home }}/emby/config"
+emby_movies_directory: "{{ movies_root }}"
+emby_movies_permissions: "rw"
+emby_tv_directory: "{{ tv_root }}"
+emby_tv_permissions: "rw"
+emby_user_id: "0"
+emby_group_id: "0"
+emby_port_http: "8096"
+emby_port_https: "8920"
+
+
+###
+### YouTubeDL-Material
+###
+youtubedlmaterial_available_externally: "false"
+youtubedlmaterial_data_directory: "{{ docker_home }}/youtubedlmaterial"
+youtubedlmaterial_dl_audio_directory: "{{ downloads_root }}/youtube/audio"
+youtubedlmaterial_dl_video_directory: "{{ downloads_root }}/youtube/video"
+youtubedlmaterial_dl_subscriptions_directory: "{{ downloads_root }}/youtube/subscriptions"
+youtubedlmaterial_port_http: "8998"
+
+###
+### Couchpotato
+###
+couchpotato_available_externally: "false"
+couchpotato_config_directory: "{{ docker_home }}/couchpotato/config"
+couchpotato_movies_directory: "{{ movies_root }}"
+couchpotato_downloads_directory: "{{ downloads_root }}"
+couchpotato_torrents_directory: "{{ torrents_root }}"
+couchpotato_user_id: "0"
+couchpotato_group_id: "0"
+couchpotato_port: "5050" 
+
+###
+### Sickchill
+###
+sickchill_available_externally: "false"
+sickchill_config_directory: "{{ docker_home }}/sickchill/config"
+sickchill_tv_directory: "{{ tv_root }}"
+sickchill_downloads_directory: "{{ downloads_root }}/completed"
+sickchill_user_id: "0"
+sickchill_group_id: "0"
+sickchill_port: "8081"
+
+###
+### Ombi
+###
+ombi_available_externally: "false"
+ombi_config_directory: "{{ docker_home }}/ombi/config"
+ombi_user_id: "0"
+ombi_group_id: "0"
+
+###
+### Netdata
+###
+netdata_available_externally: "false"
+netdata_port: "19999"
+
+###
+### OpenVPN
+###
+openvpn_config_directory: "{{ docker_home }}/openvpn"
+
+###
+### ZNC
+###
+znc_available_externally: "false"
+znc_data_directory: "{{ docker_home }}/znc"
+znc_user_id: "0"
+znc_group_id: "0"
+znc_port: "6677"
+
+###
+### Stats
+###
+grafana_available_externally: "false"
+telegraf_data_directory: "{{ docker_home }}/telegraf"
+influxdb_data_directory: "{{ docker_home }}/influxdb"
+grafana_data_directory: "{{ docker_home }}/grafana"
+stat_collection_interval: 15s
+grafana_influxdb_port: "8086"
+grafana_port: "3000"
+
+###
+### Gitea
+###
+gitea_available_externally: "false"
+gitea_data_directory: "{{ docker_home }}/gitea"
+gitea_port_http: "3001"
+gitea_port_ssh: "222"
+
+###
+### Gitlab
+###
+gitlab_available_externally: "false"
+gitlab_data_directory: "{{ docker_home }}/gitlab"
+gitlab_port_http: "4080"
+gitlab_port_https: "4443"
+gitlab_port_ssh: "422"
+
+
+###
+### Nextcloud
+###
+nextcloud_available_externally: "false"
+nextcloud_data_directory: "{{ docker_home }}/nextcloud"
+nextcloud_port: "8080"
+
+###
+### nginx
+###
+nginx_data_directory: "{{ docker_home }}/nginx"
+nginx_port_http: "80"
+nginx_port_https: "443"
+
+###
+### Guacamole
+###
+guacamole_available_externally: "false"
+guacamole_data_directory: "{{ docker_home }}/guacamole"
+guacamole_port: "8090"
+
+###
+### Miniflux
+###
+miniflux_available_externally: "false"
+miniflux_data_directory: "{{ docker_home }}/miniflux"
+miniflux_admin_username: admin
+miniflux_admin_password: supersecure
+miniflux_port: "8070"
+
+
+###
+### CloudCmd
+###
+cloudcmd_available_externally: "false"
+cloudcmd_data_directory: "{{ docker_home }}/cloudcmd/config"
+cloudcmd_browse_directory: "/"
+cloudcmd_user_id: "0"
+cloudcmd_group_id: "0"
+cloudcmd_port: "7373"
+
+
+###
+### Time Machine
+###
+timemachine_data_directory: "{{ docker_home }}/timemachine"
+timemachine_volume_size_limit: "0"
+timemachine_password: timemachine
+timemachine_share_name: Data
+timemachine_log_level: error
+timemachine_port: "10445"
+
+###
+### MiniDLNA
+###
+minidlna_media_directory1: "{{ movies_root }}"
+minidlna_media_directory2: "{{ tv_root }}"
+minidlna_friendly_name: "{{ ansible_nas_hostname }}"
+minidlna_port: "8201"
+
+###
+### get_iplayer
+###
+get_iplayer_config_directory: "{{ docker_home }}/get_iplayer"
+get_iplayer_download_directory: "{{ tv_root }}/iplayer_downloads"
+get_iplayer_port: "8182"
+
+###
+### mymediaforalexa
+###
+mymediaforalexa_media_directory: "{{ music_root }}"
+mymediaforalexa_data_directory: "{{ docker_home }}/mymediaforalexa"
+
+
+###
+### The Lounge
+###
+thelounge_available_externally: "false"
+thelounge_data_directory: "{{ docker_home }}/thelounge"
+thelounge_port_one: "113"
+thelounge_port_two: "9002"
+
+###
+### Bitwarden
+###
+bitwarden_available_externally: "false"
+bitwarden_data_directory: "{{ docker_home }}/bitwarden"
+bitwarden_port_a: "19080"
+bitwarden_port_b: "3012"
+
+# Keep this token secret, this is password to access admin area of your server!
+# This token can be anything, but it's recommended to use a long, randomly generated string of characters,
+# for example running openssl rand -base64 48
+bitwarden_admin_token: qwertyuiop1234567890poiuytrewq0987654321
+
+# To create a user set this to "true", and reprovision the container by re-running the ansible-nas playbook.
+# Once you have created your user, set to "false" and run one more time.
+# Target just Bitwarden by running: ansible-playbook -i inventory nas.yml -b -K -t bitwarden
+bitwarden_allow_signups: false
+
+###
+### Firefly
+###
+firefly_available_externally: "false"
+firefly_data_directory: "{{ docker_home }}/firefly"
+firefly_port: "8066"
+
+###
+### Nzbget
+###
+nzbget_available_externally: "false"
+nzbget_data_directory: "{{ docker_home }}/nzbget"
+nzbget_download_directory: "{{ downloads_root }}"
+nzbget_user_id: "0"
+nzbget_group_id: "0"
+nzbget_port: "6789"
+
+###
+### Wallabag
+###
+wallabag_available_externally: "false"
+wallabag_data_directory: "{{ docker_home }}/wallabag"
+wallabag_port: "7780"
+
+###
+### Mosquitto
+###
+mosquitto_available_externally: "false"
+mosquitto_data_directory: "{{ docker_home }}/mosquitto"
+mosquitto_port_a: "1883"
+mosquitto_port_b: "9001"
+
+###
+### Home Assistant
+###
+homeassistant_available_externally: "false"
+homeassistant_data_directory: "{{ docker_home }}/homeassistant"
+homeassistant_port: "8123"
+
+###
+### openHAB
+###
+openhab_available_externally: "false"
+openhab_docker_image: openhab/openhab:latest
+openhab_data_directory: "{{ docker_home }}/openhab"
+openhab_port_http: "7777"
+openhab_port_https: "7778"
+
+
+###
+### Ubooquity
+###
+ubooquity_available_externally: "false"
+ubooquity_data_directory: "{{ docker_home }}/ubooquity"
+ubooquity_user_id: "0"
+ubooquity_group_id: "0"
+ubooquity_port_webui: "2202"
+ubooquity_port_admin: "2203"
+
+###
+### Serposcope
+###
+serposcope_data_directory: "{{ docker_home }}/serposcope"
+serposcope_port: 7134
+serposcope_available_externally: "false"
+
+###
+### Virtual Desktop
+###
+vd_data_directory: "{{ docker_home }}/virtual_desktop"
+vd_docker_image: "rattydave/docker-ubuntu-xrdp-mate-custom:20.04-tools"
+vd_users:
+  - username: "{{ ansible_nas_user }}"
+    password: "topsecret"
+    sudo: "Y"
+vd_rdp_port: 3389

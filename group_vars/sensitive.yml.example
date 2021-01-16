@@ -1,0 +1,62 @@
+###
+### General
+###
+
+# Sets the hostname of your Ansible NAS
+ansible_nas_hostname: docker.changeme.local
+
+# Will be added to the docker group to give user command line access to docker
+ansible_nas_user: changeme
+
+# Applications will have subdomain SSL certificates created if Traefik is enabled, e.g. ansible-nas.<your-domain>, nextcloud.<your-domain>
+ansible_nas_domain: changeme.local
+
+# Your email and domain, used for Let's Encrypt SSL certs
+ansible_nas_email: changeme@gmail.com
+
+# Cloudflare 'Global API Key', can be found on the 'My Profile' page
+cloudflare_api_key: changeme
+
+# Transmission VPN Credentials
+# If you're using Transmission with a VPN, you'll need to set these credentials.
+# See https://github.com/haugene/docker-transmission-openvpn/ for supported VPN providers.
+openvpn_username: leisure-suit-larry
+openvpn_password: secretpassword
+openvpn_provider: AWESOMEVPNPROVIDER
+openvpn_config: United-Kingdom
+
+# Slack notifications
+watchtower_slack_url: "https://discordapp.com/api/webhooks/@@@@@changeme@@@@/slack"
+watchtower_slack_id: "changeme"
+watchtower_slack_channel: "changeme"
+
+
+########################################
+############## Users ###################
+########################################
+
+UserName: changeme
+AuthKeyGitHub: changeme.keys
+
+########################################
+################ VPS ###################
+########################################
+vps_hostname: changeme.duckdns.org
+
+# DuckDNS remote settings
+duckdns_subdomain: changeme.duckdns.org
+duckdns_token: changeme
+
+
+
+############# Containers ###############
+
+## MusicBrainz
+BRAINZCODE: "changeme"
+
+## NaviDrome
+ND_SPOTIFY_ID: "changeme"
+ND_SPOTIFY_SECRET: "changeme"
+
+## PiHole
+PiHoleServerIP: "192.168.255.255"

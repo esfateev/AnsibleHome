@@ -1,0 +1,76 @@
+################################################################
+# Global configuration
+################################################################
+
+# Enable debug mode
+debug = {{ traefik_debug }}
+defaultEntryPoints = ["http", "https"]
+
+################################################################
+# Entrypoints configuration
+################################################################
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":{{ traefik_port_http }}"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+
+  [entryPoints.https]
+  address = ":{{ traefik_port_https }}"
+    [entryPoints.https.tls]
+        [[entryPoints.https.tls.certificates]]
+          certFile = "/certs/{{ ansible_nas_domain }}.crt"
+          keyFile = "/certs/{{ ansible_nas_domain }}.key"
+
+
+  [entryPoints.traefik]
+  address = ":{{ traefik_port_ui }}"
+
+################################################################
+# Traefik logs configuration
+################################################################
+
+# Traefik logs
+# [traefikLog]
+# Optional
+# Default: os.Stdout
+#
+# filePath = "log/traefik.log"
+# Format is either "json" or "common".
+# Default: "common"
+# format = "common"
+
+################################################################
+# API and dashboard configuration
+################################################################
+
+[api]
+  entryPoint = "traefik"
+  dashboard = true
+
+################################################################
+# Ping configuration
+################################################################
+
+# Enable ping
+[ping]
+
+  # Name of the related entry point
+  #
+  # Optional
+  # Default: "traefik"
+  #
+  # entryPoint = "traefik"
+
+################################################################
+# Docker configuration backend
+################################################################
+
+# Enable Docker configuration backend
+[docker]
+
+endpoint = "unix:///var/run/docker.sock"
+exposedByDefault = false
+
+[file]

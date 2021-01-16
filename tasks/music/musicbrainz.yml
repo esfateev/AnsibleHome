@@ -1,0 +1,27 @@
+---
+- name: Create MusicBrainz Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ musicbrainz_data_directory }}"
+
+- name: musicbrainz
+  docker_container:
+    name: musicbrainz
+    image: linuxserver/musicbrainz
+    volumes:
+      - "{{ musicbrainz_data_directory }}:/config:rw"
+      - "{{ musicbrainz_data_directory }}:/data:rw"
+    ports:
+      - "{{ musicbrainz_port }}:5000"
+    env:
+      TZ: "{{ ansible_nas_timezone }}"
+      BRAINZCODE: "{{ BRAINZCODE }}"
+      WEBADDRESS: "localhost"
+    restart_policy: unless-stopped
+    labels:
+      traefik.backend: "musicbrainz"
+      traefik.frontend.rule: "Host:musicbrainz.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ musicbrainz_available_externally }}"
+      traefik.port: "443"

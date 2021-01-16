@@ -1,0 +1,106 @@
+#####################################
+###########   IPTABLES  #############
+#####################################
+
+# Set ip forwarding on in /proc and in the sysctl file and reload if necessary
+- sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: Install the `iptables` package
+  package:
+    name: iptables
+    state: latest
+
+#- name: Flush existing firewall rules
+#  iptables:
+#    flush: true
+
+- name: Allow related and established connections
+  iptables:
+    chain: INPUT
+    ctstate: ESTABLISHED,RELATED
+    jump: ACCEPT
+
+- name: Firewall rule - allow port ping traffic
+  iptables:
+    chain: INPUT
+    jump: ACCEPT
+    protocol: icmp
+
+- name: DHCP.
+  iptables:
+    chain: INPUT
+    protocol: udp
+    destination_port: 67:68
+    jump: ACCEPT
+    comment: DHCP.
+
+- name: Allow new incoming SYN packets on TCP port 22 (SSH).
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: 22
+    ctstate: NEW
+    syn: match
+    jump: ACCEPT
+    comment: Accept new SSH connections.
+
+- name: Allow new incoming SYN packets on TCP port 80/443 (Nginx).
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: 80:443
+    ctstate: NEW
+    syn: match
+    jump: ACCEPT
+    comment: Accept new Nginx connections.
+
+- name: Allow new incoming packets on TCP port 5888 (Wireguard).
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: 5888
+    ctstate: NEW
+    syn: match
+    jump: ACCEPT
+    comment: Allow new incoming packets on TCP port 5888 (Wireguard).
+
+# iptables -A INPUT -i lo -m comment --comment "Allow loopback connections" -j ACCEPT
+- name: Allow loopback connections
+  iptables:
+    chain: INPUT
+    ctstate: NEW
+    jump: ACCEPT
+    in_interface: lo
+    comment: Allow loopback connections
+
+- name: Set the policy for the INPUT chain to DROP
+  iptables:
+    chain: INPUT
+    policy: DROP
+
+- name: Install `netfilter-persistent` && `iptables-persistent` packages
+  package:
+    name: "{{item}}"
+    state: present
+  with_items:
+  - iptables-persistent
+  - netfilter-persistent
+  when: ansible_os_family == "Debian"
+
+- name: Install the `fail2ban` package
+  package:
+    name: fail2ban
+    state: latest
+
+- name: Override some basic fail2ban configurations
+  copy:
+    src: templates/jail.local.j2
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: 0644
