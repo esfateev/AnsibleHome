@@ -3,8 +3,6 @@
 ### Add your customisations to inventories/<your_inventory>/group_vars/docker.yml
 ###
 
-ansible_nas_user: ""
-
 ###
 ### Applications
 ###
