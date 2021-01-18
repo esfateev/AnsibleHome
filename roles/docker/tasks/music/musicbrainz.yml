@@ -25,3 +25,4 @@
       traefik.frontend.rule: "Host:musicbrainz.{{ ansible_nas_domain }}"
       traefik.enable: "{{ musicbrainz_available_externally }}"
       traefik.port: "443"
+    dns_servers: "{{ DNS_servers}}"

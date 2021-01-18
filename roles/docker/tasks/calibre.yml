@@ -27,3 +27,4 @@
       traefik.enable: "{{ calibre_available_externally }}"
       traefik.port: "8083"
     memory: 1g
+    dns_servers: "{{ DNS_servers}}"

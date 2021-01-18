@@ -113,3 +113,4 @@
       traefik.frontend.rule: "Host:grafana.{{ ansible_nas_domain }}"
       traefik.enable: "{{ grafana_available_externally }}"
       traefik.port: "3000"
+    dns_servers: "{{ DNS_servers}}"
