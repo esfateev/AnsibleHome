@@ -1,45 +1,12 @@
 ---
-- name: Set login banner
-  template:
-    src: 01-custom.motd
-    dest: /etc/update-motd.d/01-custom
+pre_tasks:
+  - import_tasks: tasks/users.yml
+    tags: users
 
-# - name: Enable Universe repository
-#   raw: apt-add-repository universe
-#   register: add_repo_result
-#   changed_when: "'distribution component enabled for all sources' in add_repo_result.stdout"
-#   until: add_repo_result.rc == 0
-#   retries: 3
-#   delay: 1
+tasks:
+  - debug: var=ansible_default_ipv4 verbosity=0
+  - import_tasks: tasks/general.yml
+    tags: general
 
-- name: Update apt-cache
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600
-  register: result
-  until: result is succeeded
-
-- name: Upgrade all packages
-  apt:
-    upgrade: true
-    state: latest
-  when: keep_packages_updated
-  tags:
-    - skip_ansible_lint
-
-- name: Install default packages
-  apt:
-    name: "{{ ansible_extra_packages }}"
-    state: present
-  register: result
-  until: result is succeeded
-
-#  - name: Configure smartmontools
-
-- name: "Set hostname to {{ ansible_nas_hostname }}"
-  hostname:
-    name: "{{ ansible_nas_hostname }}"
-
-- name: "Set timezone to {{ ansible_nas_timezone }}"
-  timezone:
-    name: "{{ ansible_nas_timezone }}"
+# - include: users.yml
+# - include: general.yml
