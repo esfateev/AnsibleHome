@@ -1,0 +1,50 @@
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+
+- name: Install Packages
+  apt:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ install_pakacges }}'
+
+- name: Run google-authenticator
+  expect:
+    command: google-authenticator
+    responses:
+      Question:
+        - Do you want authentication tokens to be time-based (y/n): y
+        - Do you want me to update your "~/.google_authenticator" file (y/n): y
+        - Do you want to disallow multiple uses of the same authentication token? This restricts you to one login about every 30s, but it increases your chances to notice or even prevent man-in-the-middle attacks (y/n): y
+        - Do you want to do so? (y/n): n
+        - Do you want to enable rate-limiting (y/n): y
+    timeout: 30 
+
+- name: Insert/Update "OpenSSH to Use MFA/2FA" configuration block in /etc/pam.d/sshd
+  blockinfile:
+    path: /etc/pam.d/sshd
+    block: |
+      auth required pam_google_authenticator.so nullok
+      auth required pam_permit.so
+
+- name: SSH to support MFA/2FA 
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^SChallengeResponseAuthentication'
+    line: 'ChallengeResponseAuthentication yes'
+
+- name: Insert/Update "SSH Aware of MFA" configuration block in /etc/ssh/sshd_config
+  blockinfile:
+    path: /etc/ssh/sshd_config
+    block: |
+      AuthenticationMethods publickey,password publickey,keyboard-interactive
+
+- name: PAM not to prompt for a password 
+  lineinfile:
+    path: /etc/pam.d/sshd
+    state: present
+    regexp: '^@include common-auth'
+    line: '# @include common-auth'
