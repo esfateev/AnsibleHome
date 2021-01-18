@@ -175,9 +175,3 @@
   - import_tasks: tasks/music/musicbrainz.yml
     when: (musicbrainz_enabled | default(False))
     tags: musicbrainz
-
-
-- hosts: VPS
-  gather_facts: yes
-  roles: 
-  - { role: roles/VPS }
