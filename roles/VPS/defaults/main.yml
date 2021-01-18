@@ -1,2 +1,6 @@
 ---
 ### Default Configuration data
+## Install necessary packeges via apt
+install_packages: 
+- libpam-google-authenticator
+

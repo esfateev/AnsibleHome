@@ -1,6 +1,6 @@
 ---
-- include: ssh.yml
-- include: PortKnock.yml
-- include: IPTables.yml
-- icnlude: Fail2Ban.yml
-- include: wireguard.yml
+# - include: ssh.yml
+# - include: PortKnock.yml
+# - include: IPTables.yml
+# - icnlude: Fail2Ban.yml
+# - include: wireguard.yml
