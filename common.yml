@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: yes
   roles:
-    - rolw: roles/common
+    - role: roles/common
 
     # - hosts: vps
 #   roles:
