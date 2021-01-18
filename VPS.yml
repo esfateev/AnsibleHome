@@ -1,4 +1,4 @@
 - hosts: vps
-  gather_facts: yes
+  gather_facts: yes 
   roles: 
   - { role: roles/vps }
