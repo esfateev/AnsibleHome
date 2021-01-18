@@ -180,4 +180,4 @@
 - hosts: VPS
   gather_facts: yes
   roles: 
-  - { role: VPS }
+  - { role: roles/VPS }
