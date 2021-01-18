@@ -31,3 +31,4 @@
       traefik.frontend.rule: "Host:navidrome.{{ ansible_nas_domain }}"
       traefik.enable: "{{ navidrome_available_externally }}"
       traefik.port: "4533"
+    dns_servers: "{{ DNS_servers}}"

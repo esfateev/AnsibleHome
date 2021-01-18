@@ -29,3 +29,4 @@
       traefik.frontend.rule: "Host:sabnzbd.{{ ansible_nas_domain }}"
       traefik.enable: "{{ sabnzbd_available_externally }}"
       traefik.port: "8080"
+    dns_servers: "{{ DNS_servers}}"

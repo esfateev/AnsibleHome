@@ -1,0 +1,38 @@
+---
+- hosts: all
+  gather_facts: yes
+
+  pre_tasks:
+    - import_tasks: tasks/users.yml
+      tags: users
+
+  tasks:
+  - debug: var=ansible_default_ipv4 verbosity=0
+  - import_tasks: tasks/general.yml
+    tags: general
+
+    # - hosts: vps
+#   roles:
+#     - role: roles/rofrantz.duckdns
+#     - role: roles/hispanico.nginx-revproxy
+#   tasks:
+#   - import_tasks: tasks/vps.yml
+#     tags: vps
+#   vars:
+#     nginx_revproxy_sites:
+#       changeme.duckdns.org:
+#         domains:
+#           - changeme.duckdns.org
+#         upstreams:
+#           - { backend_address: 192.168.1.20, backend_port: 443 }
+#         letsencrypt: false
+#         letsencrypt_email: 'mail@gmail.co'
+
+#       changeme.duckdns.org:
+#         domains:
+#           - changeme.duckdns.org
+#         upstreams:
+#           - { backend_address: 192.168.1.1, backend_port: 443 }
+#         letsencrypt: false
+#         letsencrypt_email: 'mail@gmail.co'
+
