@@ -1,6 +1,6 @@
 - name: Display all variables/facts known for a host
   debug:
-    var: hostvars[ansible_nas_user]
+    var: hostvars[inventory_hostname]
     verbosity: 4
 
 - import_tasks: tasks/docker.yml
