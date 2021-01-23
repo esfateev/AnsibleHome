@@ -12,4 +12,4 @@ site
 # Session
 Session.vim
 group_vars/sensitive.yml
-vars/main.yml
+vars/creds.yml

@@ -1,6 +1,10 @@
+- name: Grab auth creds
+  include_vars:  './vars/creds.yml'
+  no_log: 'yes'
+
 - name: Create user
   user:
-    name: "{{ UserName }}"
+    name: "{{ username }}"
     state: present
     create_home: yes
     group: sudo
@@ -8,12 +12,12 @@
 
 - name: Change user password
   user:
-    name: "{{ UserName }}"
+    name: "{{ username }}"
     update_password: always
     password: "{{ newpassword|password_hash('sha512') }}"
 
 - name: Set authorized keys taken from url
   authorized_key:
-    user: "{{ UserName }}"
+    user: "{{ username }}"
     state: present
     key: "https://github.com/{{ AuthKeyGitHub }}"
