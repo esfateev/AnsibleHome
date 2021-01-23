@@ -1,0 +1,5 @@
+- hosts: vps
+  gather_facts: yes 
+  roles: 
+  - { role: roles/vps }
+  - { role: roles/unbound }

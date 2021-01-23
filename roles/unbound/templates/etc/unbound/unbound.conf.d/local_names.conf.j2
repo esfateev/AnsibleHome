@@ -1,0 +1,14 @@
+{% if unbound_authoritative_zones is defined %}
+{%   for item in unbound_authoritative_zones %}
+  private-domain: "{{ item['zone'] }}"
+  local-zone: "{{ item['zone'] }}." static
+{%     for item2 in item['a_records'] %}
+  local-data: "{{ item2['name'] }}.{{ item['zone'] }}. IN A {{ item2['ip'] }}"
+{%     endfor %}
+{%     if item['create_ptr_records'] %}
+{%       for item2 in item['a_records'] %}
+  local-data-ptr: "{{ item2['ip'] }} {{ item2['name'] }}.{{ item['zone'] }}"
+{%       endfor %}
+{%     endif %}
+{%   endfor %}
+{% endif %}

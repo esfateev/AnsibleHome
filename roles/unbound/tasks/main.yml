@@ -1,0 +1,55 @@
+# Install package "Unbound"
+
+- name: Install the `unbound` package
+  package:
+    name: unbound
+    state: latest
+
+# Configuration 
+
+- name: Copy root.hints file
+  copy:
+    src: "etc/unbound/root.hints"
+    dest: "/etc/unbound/root.hints"
+
+- name: Copy cron-script root.hints.sh 
+  copy:
+    src: "etc/admin-scripts/root.hints.sh"
+    dest: "/etc/admin-scripts/root.hints.sh"
+    mode: a+x
+
+- name: Creates a cron file under /etc/cron.d
+  ansible.builtin.cron:
+    name: root.hints.sh
+    weekday: "4"
+    minute: "0"
+    hour: "1"
+    user: root
+    job: "/etc/admin-scripts/root.hints.sh"
+    cron_file: root.hints-update
+
+- name: config_unbound | configuring unbound
+  template:
+    src: "etc/unbound/unbound.conf.d/local.conf.j2"
+    dest: "{{ unbound_config_dir }}/local.conf"
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o=r"
+  become: true
+  notify: "restart unbound"
+
+- name: Copy unbound.conf
+  copy:
+    src: "etc/unbound/unbound.conf"
+    dest: "/etc/unbound/unbound.conf"
+
+- name: Copy unbound.conf.d files
+  copy: src=etc/unbound/unbound.conf.d/{{ item }} dest=/etc/unbound/unbound.conf.d/
+  with_items:
+    - access_options.conf
+    - cache_options.conf
+    - dnssec_options.conf
+    - forwarders.conf
+    - local_names.conf
+    - name_solving.conf
+    - privacy_options.conf

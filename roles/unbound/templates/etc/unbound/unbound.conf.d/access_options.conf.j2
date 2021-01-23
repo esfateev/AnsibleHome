@@ -1,0 +1,5 @@
+{% if unbound_access_control is defined %}
+{%   for item in unbound_access_control %}
+  access-control: {{ item.subnet }} {{ item.action }}
+{%   endfor %}
+{% endif %}

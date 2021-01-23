@@ -1,0 +1,12 @@
+{% if unbound_enable_prefetch is defined and unbound_enable_prefetch %}
+  prefetch: yes
+{% endif %}
+{% if unbound_enable_prefetch_key is defined and unbound_enable_prefetch_key %}
+  prefetch-key: yes
+{% endif %}
+{% if unbound_cache_min_ttl is defined %}
+  cache-min-ttl: {{ unbound_cache_min_ttl }}
+{% endif %}
+{% if unbound_cache_max_ttl is defined %}
+  cache-max-ttl: {{ unbound_cache_max_ttl }}
+{% endif %}

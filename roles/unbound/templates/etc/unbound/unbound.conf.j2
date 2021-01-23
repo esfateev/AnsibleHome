@@ -1,0 +1,33 @@
+server:
+{% if unbound_listen_addresses is defined %}
+{%   for item in unbound_listen_addresses %}
+  interface: {{ item }}
+{%   endfor %}
+{% endif %}
+
+{% if unbound_use_syslog is defined and unbound_use_syslog %}
+  use-syslog: yes
+{% elif unbound_use_syslog is defined and not unbound_use_syslog %}
+  use-syslog: no
+  logfile: {{ unbound_logfile }}
+{% endif %}
+{% if unbound_log_queries is defined and unbound_log_queries %}
+  log-queries: yes
+{% endif %}
+
+  root-hints: /etc/unbound/root.hints
+
+include: /etc/unbound/unbound.conf.d/access_options.conf
+include: /etc/unbound/unbound.conf.d/privacy_options.conf
+include: /etc/unbound/unbound.conf.d/cache_options.conf
+include: /etc/unbound/unbound.conf.d/dnssec_options.conf
+include: /etc/unbound/unbound.conf.d/blacklist.conf
+include: /etc/unbound/unbound.conf.d/local_names.conf
+include: /etc/unbound/unbound.conf.d/local.conf
+include: /etc/unbound/unbound.conf.d/opennic_names.conf
+include: /etc/unbound/unbound.conf.d/forwarders.conf
+
+{% if unbound_remote_control is defined and not unbound_remote_control %}
+remote-control:
+        control-enable: no
+{% endif %}

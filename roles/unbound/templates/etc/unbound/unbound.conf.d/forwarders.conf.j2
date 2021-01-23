@@ -1,0 +1,18 @@
+#forward-zone:
+#  name: "."
+#  forward-addr: 1.1.1.1@53#one.one.one.one
+#  forward-addr: 8.8.8.8@53#dns.google
+#  forward-addr: 9.9.9.9@53#dns.quad9.net
+#  forward-addr: 1.0.0.1@53#one.one.one.one
+#  forward-addr: 8.8.4.4@53#dns.google
+#  forward-addr: 149.112.112.112@53#dns.quad9.net
+
+{% if unbound_forward_zones is defined %}
+{%   for item in unbound_forward_zones %}
+  forward-zone:
+    name: "{{ item.zone }}"
+{%     for fa in item.forward_addresses %}
+    forward-addr: {{ fa }}
+{%     endfor %}
+{%   endfor %}
+{% endif %}
