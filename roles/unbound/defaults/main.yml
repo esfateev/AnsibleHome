@@ -17,14 +17,20 @@ unbound_access_control:
 # If you would like PTR(reverse) records to be created set
 # create_ptr_records: true
 # otherwise set create_ptr_records: false
-unbound_authoritative_zones: []
-  # - zone: 'vagrant.local'
-  #   a_records:
-  #     - name: 'srv01'
-  #       ip: 192.168.250.101
-  #     - name: 'srv02'
-  #       ip: 192.168.250.102
-  #   create_ptr_records: true
+unbound_authoritative_zones:
+  - zone: 'vagrant.local'
+    a_records:
+      - name: 'srv01'
+        ip: 192.168.250.101
+      - name: 'srv02'
+        ip: 192.168.250.102
+    cname_records:
+      - cname: 'alias2_srv01'
+        name: 'srv01'
+    create_ptr_records: true
+
+domain_insecure:
+  domain_suffix: domain.local
 
 # Maximum lifetime of cached entries.
 # Default is 86400 seconds (1  day).
@@ -45,17 +51,16 @@ unbound_enable_prefetch_key: true
 unbound_enable_optimizations: false
 
 # Defines forwarding zones and addresses to forward to for each zone
-unbound_forward_zones: []
+unbound_forward_zones: 
+  - zone: '.'
+    forward_addresses:
+      - 84.200.69.80 #DNS.WATCH
+      - 84.200.70.40 #DNS.WATCH
+      - 51.254.25.115 #opennic
   # - zone: everythingshouldbevirtual.local
   #   forward_addresses:
   #     - 10.0.101.111
   #     - 10.0.101.112
-    # Defines all zones not specifically defined to forward to addresses
-    # Google DNS in this example.
-  # - zone: '.'
-  #   forward_addresses:
-  #     - 8.8.8.8
-  #     - 8.8.4.4
 
 # Enable\Disable remote control. By Security issues - false is better.
 unbound_remote_control: false

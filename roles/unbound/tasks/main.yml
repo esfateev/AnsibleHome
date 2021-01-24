@@ -12,6 +12,11 @@
     src: "etc/unbound/root.hints"
     dest: "/etc/unbound/root.hints"
 
+- name: Create the directories
+  file:
+    path: "/etc/admin-scripts/"
+    state: directory
+   
 - name: Copy cron-script root.hints.sh 
   copy:
     src: "etc/admin-scripts/root.hints.sh"
@@ -26,30 +31,28 @@
     hour: "1"
     user: root
     job: "/etc/admin-scripts/root.hints.sh"
-    cron_file: root.hints-update
+    cron_file: root.hints.update
 
-- name: config_unbound | configuring unbound
-  template:
-    src: "etc/unbound/unbound.conf.d/local.conf.j2"
-    dest: "{{ unbound_config_dir }}/local.conf"
-    owner: "root"
-    group: "root"
-    mode: "u=rw,g=r,o=r"
-  become: true
-  notify: "restart unbound"
+- name: Copy opennic_names.conf
+  copy:
+    src: "etc/unbound/unbound.conf.d/opennic_names.conf"
+    dest: "/etc/unbound/unbound.conf.d/opennic_names.conf"
 
 - name: Copy unbound.conf
-  copy:
-    src: "etc/unbound/unbound.conf"
+  template:
+    src: "etc/unbound/unbound.conf.j2"
     dest: "/etc/unbound/unbound.conf"
+  notify: "restart unbound"
 
 - name: Copy unbound.conf.d files
-  copy: src=etc/unbound/unbound.conf.d/{{ item }} dest=/etc/unbound/unbound.conf.d/
+  template:
+    src: "etc/unbound/unbound.conf.d/{{ item.src }}"
+    dest: "/etc/unbound/unbound.conf.d/{{ item.dest }}"
   with_items:
-    - access_options.conf
-    - cache_options.conf
-    - dnssec_options.conf
-    - forwarders.conf
-    - local_names.conf
-    - name_solving.conf
-    - privacy_options.conf
+    - {src: 'access_options.conf.j2', dest: 'access_options.conf'}
+    - {src: 'cache_options.conf.j2', dest: 'cache_options.conf'}
+    - {src: 'dnssec_options.conf.j2', dest: 'dnssec_options.conf'}
+    - {src: 'forwarders.conf.j2', dest: 'forwarders.conf'}
+    - {src: 'local_names.conf.j2', dest: 'local_names.conf'}
+    - {src: 'privacy_options.conf.j2', dest: 'privacy_options.conf'}
+  notify: "restart unbound"

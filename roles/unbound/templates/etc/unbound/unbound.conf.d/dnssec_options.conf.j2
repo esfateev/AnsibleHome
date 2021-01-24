@@ -1,7 +1,5 @@
-# domain-insecure: "dyn."
-# domain-insecure: "geek."
-{%     for domain_item in item.domain_insecure %}
-    domain-insecure: {{ domain_item }}
+{%     for item in domain_insecure %}
+    domain-insecure: "{{ item.domain_suffix }}"
 {%     endfor %}
 
 {% if unbound_anchor_file is defined %}
