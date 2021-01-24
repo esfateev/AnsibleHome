@@ -107,14 +107,14 @@
 ##############  Music #################
 #######################################
 
- - import_tasks: tasks/music/airsonic-advanced.yml
-   when: (airsonic_adv_enabled | default(False))
-   tags: airsonic-advanced
+- import_tasks: tasks/music/airsonic-advanced.yml
+  when: (airsonic_adv_enabled | default(False))
+  tags: airsonic-advanced
 
- - import_tasks: tasks/music/airsonic.yml
-   when: (airsonic_enabled | default(False))
-   tags: airsonic
-
+- import_tasks: tasks/music/airsonic.yml
+  when: (airsonic_enabled | default(False))
+  tags: airsonic
+  
 - import_tasks: tasks/music/jackett.yml
   when: (jackett_enabled | default(False))
   tags: jackett
