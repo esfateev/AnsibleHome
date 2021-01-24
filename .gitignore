@@ -11,4 +11,4 @@ site
 
 # Session
 Session.vim
-group_vars/sensitive.yml
+env-vars.json

@@ -26,4 +26,5 @@
   authorized_key:
     user: "{{ UserName }}"
     state: present
-    key: "https://github.com/{{ AuthKeyGitHub }}"
+#    key: "https://github.com/{{ AuthKeyGitHub }}"
+    key: "{{ lookup('file', '/home/ansible/.ssh/id_rsa.pub') }}"

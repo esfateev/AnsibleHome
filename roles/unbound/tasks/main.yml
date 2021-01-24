@@ -1,0 +1,58 @@
+# Install package "Unbound"
+
+- name: Install the `unbound` package
+  package:
+    name: unbound
+    state: latest
+
+# Configuration 
+
+- name: Copy root.hints file
+  copy:
+    src: "etc/unbound/root.hints"
+    dest: "/etc/unbound/root.hints"
+
+- name: Create the directories
+  file:
+    path: "/etc/admin-scripts/"
+    state: directory
+   
+- name: Copy cron-script root.hints.sh 
+  copy:
+    src: "etc/admin-scripts/root.hints.sh"
+    dest: "/etc/admin-scripts/root.hints.sh"
+    mode: a+x
+
+- name: Creates a cron file under /etc/cron.d
+  ansible.builtin.cron:
+    name: root.hints.sh
+    weekday: "4"
+    minute: "0"
+    hour: "1"
+    user: root
+    job: "/etc/admin-scripts/root.hints.sh"
+    cron_file: root.hints.update
+
+- name: Copy opennic_names.conf
+  copy:
+    src: "etc/unbound/unbound.conf.d/opennic_names.conf"
+    dest: "/etc/unbound/unbound.conf.d/opennic_names.conf"
+
+- name: Copy unbound.conf
+  template:
+    src: "etc/unbound/unbound.conf.j2"
+    dest: "/etc/unbound/unbound.conf"
+  notify: "restart unbound"
+
+- name: Copy unbound.conf.d files
+  template:
+    src: "etc/unbound/unbound.conf.d/{{ item.src }}"
+    dest: "/etc/unbound/unbound.conf.d/{{ item.dest }}"
+  with_items:
+    - {src: 'access_options.conf.j2', dest: 'access_options.conf'}
+    - {src: 'cache_options.conf.j2', dest: 'cache_options.conf'}
+    - {src: 'dnssec_options.conf.j2', dest: 'dnssec_options.conf'}
+    - {src: 'forwarders.conf.j2', dest: 'forwarders.conf'}
+    - {src: 'local_names.conf.j2', dest: 'local_names.conf'}
+    - {src: 'privacy_options.conf.j2', dest: 'privacy_options.conf'}
+  notify: "restart unbound"

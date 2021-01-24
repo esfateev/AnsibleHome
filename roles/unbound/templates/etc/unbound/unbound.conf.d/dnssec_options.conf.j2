@@ -1,0 +1,7 @@
+{%     for item in domain_insecure %}
+    domain-insecure: "{{ item.domain_suffix }}"
+{%     endfor %}
+
+{% if unbound_anchor_file is defined %}
+  auto-trust-anchor-file: "/var/lib/unbound/root.key"
+{% endif %}

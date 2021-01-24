@@ -1,0 +1,15 @@
+
+{% if unbound_enable_optimizations %}
+  ###<--- Begin Optimizations -->
+  #Use all CPUs
+  num-threads: {{ unbound_optimizations.num_threads }}
+  #Power of 2 close to num-threads
+  msg-cache-slabs: {{ unbound_optimizations.msg_cache_slabs }}
+  rrset-cache-slabs: {{ unbound_optimizations.rrset_cache_slabs }}
+  infra-cache-slabs: {{ unbound_optimizations.infra_cache_slabs }}
+  key-cache-slabs: {{ unbound_optimizations.key_cache_slabs }}
+  #Cache Memory
+  rrset-cache-size: {{ unbound_optimizations.rrset_cache_size }}
+  msg-cache-size: {{ unbound_optimizations.msg_cache_size }}
+  ###<--- End Optimizations -->
+{% endif %}

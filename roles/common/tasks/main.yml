@@ -1,0 +1,12 @@
+---
+#pre_tasks:
+#  - import_tasks: tasks/users.yml
+#    tags: users
+#
+#tasks:
+#  - debug: var=ansible_default_ipv4 verbosity=0
+#  - import_tasks: tasks/general.yml
+#    tags: general
+
+- include: users.yml
+- include: general.yml
