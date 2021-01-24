@@ -36,8 +36,8 @@ lidarr_enabled: true
 youtubedlmaterial_enabled: false
 
 # Music
-airsonic_enabled: true
-airsonic_adv_enabled: true
+airsonic_enabled: false
+airsonic_adv_enabled: false
 mymediaforalexa_enabled: false
 headphones_enabled: true
 musicbrainz_enabled: true
