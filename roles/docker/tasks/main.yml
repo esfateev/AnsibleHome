@@ -131,6 +131,6 @@
   when: (musicbrainz_enabled | default(False))
   tags: musicbrainz
 
-- import_tasks: tasks/video/lidarr.yml
+- import_tasks: tasks/music/lidarr.yml
   when: (lidarr_enabled | default(False))
   tags: lidarr
