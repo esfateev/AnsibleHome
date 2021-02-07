@@ -20,13 +20,13 @@
   register: result
   until: result is succeeded
 
-- name: "Mount USB-drive to nas-point"
-  mount:
-    path: "{{ samba_shares_root }}"
-    src: UUID=b63cba41-16d3-4583-b4c8-eea4d6661035
-    fstype: ext4
-    opts: noatime
-    state: mounted
+# - name: "Mount USB-drive to nas-point"
+#   mount:
+#     path: "{{ samba_shares_root }}"
+#     src: UUID=b63cba41-16d3-4583-b4c8-eea4d6661035
+#     fstype: ext4
+#     opts: noatime
+#     state: mounted
 
 - name: "Permission share directories"
   file:
