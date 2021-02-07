@@ -150,21 +150,22 @@ docker_storage_driver: overlay2
 # The location where all shares will be created by default. Can be overridden on a per-share basis.
 # This path will be mounted to backup containers, Duplicati
 samba_shares_root: /mnt/usb-hdd
+nas_nfs_root: /nfs/nas.fes.local
 
 # Where stuff downloaded will be stored
 downloads_root: "{{ samba_shares_root }}/downloads"
 
 # Where your movies are stored
-movies_root: "{{ samba_shares_root }}/movies"
-
+#movies_root: "{{ samba_shares_root }}/movies"
+movies_root: "{{ nas_nfs_root }}/movies"
 # Where your TV episodes are stored
-tv_root: "{{ samba_shares_root }}/tv"
+tv_root: "{{ nas_nfs_root }}/tv"
 
 # Where torrent files are stored (picked up by Transmission for downloading)
 torrents_root: "{{ samba_shares_root }}/torrents"
 
 # Where music is stored
-music_root: "{{ samba_shares_root }}/music"
+music_root: "{{ nas_nfs_root }}/music"
 
 # Where podcasts are stored
 podcasts_root: "{{ samba_shares_root }}/podcasts"
@@ -308,6 +309,7 @@ ansible_extra_packages:
   - software-properties-common
   - mc
   - qemu-guest-agent
+  - nfs-common
 
 ansible_python_interpreter: /usr/bin/python3
 

@@ -45,14 +45,6 @@
   when: (mosquitto_enabled | default(False))
   tags: mosquitto
 
-- import_tasks: tasks/plex.yml
-  when: (plex_enabled | default(False))
-  tags: plex
-
-- import_tasks: tasks/tautulli.yml
-  when: (tautulli_enabled | default(False))
-  tags: tautulli
-
 - import_tasks: tasks/transmission.yml
   when: (transmission_enabled | default(False))
   tags: transmission
@@ -73,22 +65,6 @@
   when: (bazarr_enabled | default(False))
   tags: bazarr
 
-- import_tasks: tasks/lidarr.yml
-  when: (lidarr_enabled | default(False))
-  tags: lidarr
-
-- import_tasks: tasks/sonarr.yml
-  when: (sonarr_enabled | default(False))
-  tags: sonarr
-
-- import_tasks: tasks/radarr.yml
-  when: (radarr_enabled | default(False))
-  tags: radarr
-
-- import_tasks: tasks/jellyfin.yml
-  when: (jellyfin_enabled | default(False))
-  tags: jellyfin
-
 - import_tasks: tasks/glances.yml
   when: (glances_enabled | default(False))
   tags: glances
@@ -96,7 +72,31 @@
 - import_tasks: tasks/krusader.yml
   when: (krusader_enabled | default(False))
   tags: krusader
-##############  DevOPS #################
+
+##############  Video #################
+#######################################
+
+- import_tasks: tasks/video/jellyfin.yml
+  when: (jellyfin_enabled | default(False))
+  tags: jellyfin
+
+- import_tasks: tasks/video/sonarr.yml
+  when: (sonarr_enabled | default(False))
+  tags: sonarr
+
+- import_tasks: tasks/video/radarr.yml
+  when: (radarr_enabled | default(False))
+  tags: radarr
+
+- import_tasks: tasks/video/plex.yml
+  when: (plex_enabled | default(False))
+  tags: plex
+
+- import_tasks: tasks/video/tautulli.yml
+  when: (tautulli_enabled | default(False))
+  tags: tautulli
+
+##############  DevOPS ################
 #######################################
 
 - import_tasks: tasks/devops/gitea.yml
@@ -130,3 +130,7 @@
 - import_tasks: tasks/music/musicbrainz.yml
   when: (musicbrainz_enabled | default(False))
   tags: musicbrainz
+
+- import_tasks: tasks/video/lidarr.yml
+  when: (lidarr_enabled | default(False))
+  tags: lidarr
