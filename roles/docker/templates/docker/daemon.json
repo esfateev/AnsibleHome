@@ -1,4 +1,6 @@
 {
   "data-root": "{{ docker_image_directory }}",
   "storage-driver": "{{ docker_storage_driver }}"
+  "dns": ["192.168.0.1"],
+  "dns-search": ["fes.lan"]
 }

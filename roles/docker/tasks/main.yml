@@ -25,10 +25,6 @@
   when: (heimdall_enabled | default(False))
   tags: heimdall
 
-- import_tasks: tasks/sabnzbd.yml
-  when: (sabnzbd_enabled | default(False))
-  tags: sabnzbd
-
 - import_tasks: tasks/organizr.yml
   when: (organizr_enabled | default(False))
   tags: organizr
@@ -45,14 +41,6 @@
   when: (mosquitto_enabled | default(False))
   tags: mosquitto
 
-- import_tasks: tasks/transmission.yml
-  when: (transmission_enabled | default(False))
-  tags: transmission
-
-- import_tasks: tasks/transmission_with_openvpn.yml
-  when: (transmission_with_openvpn_enabled | default(False))
-  tags: transmission
-
 - import_tasks: tasks/duplicati.yml
   when: (duplicati_enabled | default(False))
   tags: duplicati
@@ -60,10 +48,6 @@
 - import_tasks: tasks/calibre.yml
   when: (calibre_enabled | default(False))
   tags: calibre
-
-- import_tasks: tasks/bazarr.yml
-  when: (bazarr_enabled | default(False))
-  tags: bazarr
 
 - import_tasks: tasks/glances.yml
   when: (glances_enabled | default(False))
@@ -134,3 +118,22 @@
 - import_tasks: tasks/music/lidarr.yml
   when: (lidarr_enabled | default(False))
   tags: lidarr
+
+############  Downloads ###############
+#######################################
+
+- import_tasks: tasks/downloads/bazarr.yml
+  when: (bazarr_enabled | default(False))
+  tags: bazarr
+
+- import_tasks: tasks/downloads/sabnzbd.yml
+  when: (sabnzbd_enabled | default(False))
+  tags: sabnzbd
+
+- import_tasks: tasks/downloads/transmission.yml
+  when: (transmission_enabled | default(False))
+  tags: transmission
+
+- import_tasks: tasks/downloads/transmission_with_openvpn.yml
+  when: (transmission_with_openvpn_enabled | default(False))
+  tags: transmission
