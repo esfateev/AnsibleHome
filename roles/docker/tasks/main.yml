@@ -9,7 +9,7 @@
   when: (watchtower_enabled | default(False))
   tags: watchtower
 
-- import_tasks: tasks/traefik.yml
+- import_tasks: tasks/traefik2.yml
   when: (traefik_enabled | default(False))
   tags: traefik
 

@@ -59,7 +59,7 @@ watchtower_enabled: true
 cloudflare_ddns_enabled: false
 cloudcmd_enabled: false
 virtual_desktop_enabled: false
-krusader_enabled: true
+krusader_enabled: false
 
 # Backup & Restore
 duplicati_enabled: true
@@ -335,7 +335,7 @@ samba_netbios_name: "{{ ansible_nas_hostname }}"
 ###
 ### Traefik
 ###
-traefik_docker_image: traefik:v1.7
+traefik_docker_image: traefik:v2.4
 traefik_data_directory: "{{ docker_home }}/traefik"
 traefik_debug: "false"
 
