@@ -14,9 +14,9 @@
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       ## Keep configs, scrapers, and plugins here.
-      - "{{ stash_config_directory }}/config:/root/.stash"
+      - "{{ stash_config_directory }}/config:/root/.stash:rw"
       ## Point this at your collection.
-      - "{{ stash_data_directory }}/data:/data"
+      - "{{ stash_data_directory }}/data:/data:rw"
       ## This is where your stash's metadata lives
       - "{{ stash_data_directory }}/metadata:/metadata"
       ## Any other cache content.

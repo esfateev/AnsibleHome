@@ -107,7 +107,7 @@ pytivo_enabled: false
 # SEO
 serposcope_enabled: false
 
-ansible-semaphore_enabled: false
+ansible_semaphore_enabled: false
 
 stash_enabled: true
 

@@ -92,7 +92,7 @@
   tags: gitea
 
 - import_tasks: tasks/devops/ansible-semaphore.yml
-  when: (ansible-semaphore_enabled | default(False))
+  when: (ansible_semaphore_enabled | default(False))
   tags: ansible-semaphore
 
 ##############  Music #################
