@@ -17,8 +17,8 @@ sabnzbd_enabled: true
 
 
 # Media Serving
-plex_enabled: true
-tautulli_enabled: true
+plex_enabled: false
+tautulli_enabled: false
 
 # Media Sourcing
 sonarr_enabled: true         # tv
@@ -47,9 +47,9 @@ navidrome_enabled: true
 miniflux_enabled: false
 
 # System Management
-pihole_enabled: true
+pihole_enabled: false
 heimdall_enabled: true
-organizr_enabled: true
+organizr_enabled: false
 portainer_enabled: true
 glances_enabled: true
 stats_enabled: false
@@ -67,7 +67,7 @@ nextcloud_enabled: false
 timemachine_enabled: false
 
 # Software build and CI
-gitea_enabled: true
+gitea_enabled: false
 
 # IRC
 znc_enabled: false
@@ -83,13 +83,13 @@ firefly_enabled: false
 wallabag_enabled: false
 
 # Home Automation
-homeassistant_enabled: true
-mosquitto_enabled: true
+homeassistant_enabled: false
+mosquitto_enabled: false
 homebridge_enabled: false
 openhab_enabled: false
 
 # Wiki JS
-wiki_enabled: true
+wiki_enabled: false
 
 # Books
 calibre_enabled: true
