@@ -33,11 +33,6 @@
       STASH_GENERATED: "/generated/"
       STASH_METADATA: "/metadata/"
       STASH_CACHE: "/cache/"
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "10"
-        max-size: "2m"
     restart_policy: unless-stopped
     memory: 1g
     labels:
