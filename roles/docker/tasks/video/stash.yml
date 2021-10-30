@@ -24,7 +24,7 @@
       ## Where to store generated content (screenshots,previews,transcodes,sprites)
       - "{{ stash_data_directory }}/generated:/generated"
     ports:
-      - "{{ stash_port_http }}:9999"
+      - "{{ stash_port_https }}:9999"
     env:
       TZ: "{{ ansible_nas_timezone }}"
       PUID: "{{ stash_user_id }}"
