@@ -161,6 +161,10 @@ movies_root: "{{ nas_nfs_root }}/movies"
 # Where your TV episodes are stored
 tv_root: "{{ nas_nfs_root }}/tv"
 
+# Where your Music Show video are stored
+show_root: "{{ nas_nfs_root }}/show"
+
+
 # Where torrent files are stored (picked up by Transmission for downloading)
 torrents_root: "{{ samba_shares_root }}/torrents"
 
