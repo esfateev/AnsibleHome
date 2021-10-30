@@ -52,7 +52,7 @@ heimdall_enabled: true
 organizr_enabled: true
 portainer_enabled: true
 glances_enabled: true
-stats_enabled: true
+stats_enabled: false
 guacamole_enabled: false
 netdata_enabled: false
 watchtower_enabled: true
@@ -376,6 +376,18 @@ gitea_available_externally: "true"
 gitea_data_directory: "{{ docker_home }}/gitea"
 gitea_port_http: "3003"
 gitea_port_ssh: "222"
+
+
+###
+### Ansible Semaphore
+###
+semaphore_available_externally: "true"
+semaphore_data_directory: "{{ docker_home }}/semaphore"
+semaphore_port_http: "3000"
+semaphore_admin_password: ""
+semaphore_db_password: ""
+semaphore_root_db_password: ""
+
 
 ###
 ### Pi-hole
