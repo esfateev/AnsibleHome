@@ -108,6 +108,7 @@ pytivo_enabled: false
 serposcope_enabled: false
 
 ansible-semaphore_enabled: false
+
 stash_enabled: true
 
 # External Access
