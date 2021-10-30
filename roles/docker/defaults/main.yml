@@ -208,6 +208,14 @@ samba_shares:
     browsable: yes
     path: "{{ tv_root }}"
 
+  - name: show
+    comment: 'Music Show'
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browsable: yes
+    path: "{{ show_root }}"
+
   - name: music
     comment: 'Music'
     guest_ok: yes
@@ -335,7 +343,7 @@ samba_netbios_name: "{{ ansible_nas_hostname }}"
 ###
 ### Traefik
 ###
-traefik_docker_image: traefik:v2.4
+traefik_docker_image: traefik:v1.7
 traefik_data_directory: "{{ docker_home }}/traefik"
 traefik_debug: "false"
 
@@ -592,6 +600,9 @@ jellyfin_photos_directory: "{{ photos_root }}"
 jellyfin_photos_permissions: "rw"
 jellyfin_tv_directory: "{{ tv_root }}"
 jellyfin_tv_permissions: "rw"
+jellyfin_show_directory: "{{ show_root }}"
+jellyfin_show_permissions: "rw"
+
 jellyfin_user_id: "0"
 jellyfin_group_id: "0"
 jellyfin_port_http: "8896"
