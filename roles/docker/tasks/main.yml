@@ -64,6 +64,10 @@
   when: (jellyfin_enabled | default(False))
   tags: jellyfin
 
+- import_tasks: tasks/video/stash.yml
+  when: (stash_enabled | default(False))
+  tags: stash
+
 - import_tasks: tasks/video/sonarr.yml
   when: (sonarr_enabled | default(False))
   tags: sonarr
@@ -87,6 +91,9 @@
   when: (gitea_enabled | default(False))
   tags: gitea
 
+- import_tasks: tasks/devops/ansible-semaphore.yml
+  when: (ansible-semaphore_enabled | default(False))
+  tags: ansible-semaphore
 
 ##############  Music #################
 #######################################

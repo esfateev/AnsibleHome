@@ -1,0 +1,48 @@
+- name: Create Stash Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ stash_data_directory }}"
+    - "{{ stash_config_directory }}"
+
+- name: Stash Docker Container
+  docker_container:
+    name: stash
+    image: stashapp/stash:latest
+    pull: true
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      ## Keep configs, scrapers, and plugins here.
+      - "{{ stash_config_directory }}/config:/root/.stash"
+      ## Point this at your collection.
+      - "{{ stash_data_directory }}/data:/data"
+      ## This is where your stash's metadata lives
+      - "{{ stash_data_directory }}/metadata:/metadata"
+      ## Any other cache content.
+      - "{{ stash_data_directory }}/cache:/cache"
+      ## Where to store generated content (screenshots,previews,transcodes,sprites)
+      - "{{ stash_data_directory }}/generated:/generated"
+    ports:
+      - "{{ stash_port_http }}:9999"
+    env:
+      TZ: "{{ ansible_nas_timezone }}"
+      PUID: "{{ stash_user_id }}"
+      PGID: "{{ stash_group_id }}"
+      STASH_STASH: "/data/"
+      STASH_GENERATED: "/generated/"
+      STASH_METADATA: "/metadata/"
+      STASH_CACHE: "/cache/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "2m"
+    restart_policy: unless-stopped
+    memory: 1g
+    labels:
+      traefik.backend: "stash"
+      traefik.frontend.rule: "Host:stash.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ stash_available_externally }}"
+      traefik.port: "9999"
+    dns_servers: "{{ DNS_servers}}"

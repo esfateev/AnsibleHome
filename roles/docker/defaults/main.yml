@@ -34,6 +34,7 @@ bazarr_enabled: true
 ombi_enabled: false
 lidarr_enabled: true
 youtubedlmaterial_enabled: false
+stash_enabled: true
 
 # Music
 airsonic_enabled: false
@@ -106,6 +107,9 @@ pytivo_enabled: false
 # SEO
 serposcope_enabled: false
 
+ansible-semaphore_enabled: false
+stash_enabled: true
+
 # External Access
 # Traefik will allow access to certain applications externally. To enable this you'll either; a domain name that points to your 
 # home static IP address, the cloudflare with the cloudflare_ddns dynamic DNS container enabled, or use a dynamic DNS provider like no-ip.
@@ -158,6 +162,10 @@ downloads_root: "{{ samba_shares_root }}/downloads"
 # Where your movies are stored
 #movies_root: "{{ samba_shares_root }}/movies"
 movies_root: "{{ nas_nfs_root }}/movies"
+
+# Where your stash are stored
+stash_root: "{{ nas_nfs_root }}/stash"
+
 # Where your TV episodes are stored
 tv_root: "{{ nas_nfs_root }}/tv"
 
@@ -203,6 +211,14 @@ samba_shares:
     writable: yes
     browsable: yes
     path: "{{ movies_root }}"
+
+  - name: stash
+    comment: 'stash'
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browsable: yes
+    path: "{{ stash_root }}"
 
   - name: tv
     comment: 'TV Episodes'
@@ -623,6 +639,17 @@ jellyfin_user_id: "0"
 jellyfin_group_id: "0"
 jellyfin_port_http: "8896"
 jellyfin_port_https: "8928"
+
+###
+### Stash
+###
+stash_available_externally: "true"
+stash_config_directory: "{{ docker_home }}/stash/config"
+stash_data_directory: "{{ stash_root }}"
+stash_user_id: "0"
+stash_group_id: "0"
+stash_port_https: "9999"
+
 
 ###
 ### Glances
