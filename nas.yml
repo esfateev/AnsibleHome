@@ -1,0 +1,4 @@
+- hosts: nas
+  gather_facts: yes 
+  roles: 
+  - { role: roles/openmediavault }
