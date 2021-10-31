@@ -40,4 +40,5 @@
       traefik.frontend.rule: "Host:stash.{{ ansible_nas_domain }}"
       traefik.enable: "{{ stash_available_externally }}"
       traefik.port: "9999"
+      lazytainer.marker: "lazytainer"
     dns_servers: "{{ DNS_servers}}"

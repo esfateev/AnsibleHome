@@ -40,6 +40,8 @@
       MYSQL_ROOT_PASSWORD: "@@@CHANGEME@@@"
     restart_policy: unless-stopped
     memory: 1g
+    labels:
+      lazytainer.marker: "lazytainer"
 
 - name: Create Gitea container
   docker_container:
@@ -72,3 +74,4 @@
       traefik.frontend.rule: "Host:git.{{ ansible_nas_domain }}"
       traefik.enable: "{{ gitea_available_externally }}"
       traefik.port: "3000"
+      lazytainer.marker: "lazytainer"

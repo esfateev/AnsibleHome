@@ -24,3 +24,5 @@
       traefik.frontend.rule: "Host:pihole.{{ ansible_nas_domain }}"
       traefik.enable: "{{ pihole_available_externally }}"
       traefik.port: "8212"
+      lazytainer.marker: "lazytainer"
+      

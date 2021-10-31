@@ -26,3 +26,4 @@
       traefik.frontend.rule: "Host:sso.{{ ansible_nas_domain }}"
       traefik.enable: "{{ sso_available_externally }}"
       traefik.port: "443"
+      lazytainer.marker: "lazytainer"

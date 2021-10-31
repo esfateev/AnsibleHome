@@ -26,5 +26,6 @@
       traefik.frontend.rule: "Host:calibre.{{ ansible_nas_domain }}"
       traefik.enable: "{{ calibre_available_externally }}"
       traefik.port: "8083"
+      lazytainer.marker: "lazytainer"
     memory: 1g
     dns_servers: "{{ DNS_servers}}"

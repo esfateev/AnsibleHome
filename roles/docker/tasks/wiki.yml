@@ -35,3 +35,4 @@
       traefik.frontend.rule: "Host:wiki.{{ ansible_nas_domain }}"
       traefik.enable: "{{ wiki_available_externally }}"
       traefik.port: "3000"
+      lazytainer.marker: "lazytainer"

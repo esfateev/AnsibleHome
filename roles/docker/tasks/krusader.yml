@@ -29,4 +29,5 @@
       traefik.frontend.rule: "Host:krusader.{{ ansible_nas_domain }}"
       traefik.enable: "{{ krusader_available_externally }}"
       traefik.port: "5800"
+      lazytainer.marker: "lazytainer"
     memory: 1g
