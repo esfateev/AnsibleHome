@@ -11,6 +11,11 @@
     name: krusader
     image: djaydev/krusader:latest
     pull: true
+    command: --port 81
+    network_mode: 
+      - service:lazytainer
+    depends_on: 
+      - lazytainer
     volumes:
       - "{{ krusader_config_directory }}:/config:rw"
       - "{{ krusader_browse_directory }}:/mnt/fs"

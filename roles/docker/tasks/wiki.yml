@@ -19,6 +19,11 @@
     name: wiki
     image: requarks/wiki
     pull: true
+    command: --port 81
+    network_mode: 
+      - service:lazytainer
+    depends_on: 
+      - lazytainer
     ports:
       - "{{ wiki_port }}:3000"
     env:

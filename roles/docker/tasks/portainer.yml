@@ -11,6 +11,11 @@
     name: portainer
     image: portainer/portainer-ce
     pull: true
+    command: --port 81
+    network_mode: 
+      - service:lazytainer
+    depends_on: 
+      - lazytainer
     volumes:
       - "{{ portainer_data_directory }}:/data:rw"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
