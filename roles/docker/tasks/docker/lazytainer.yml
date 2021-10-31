@@ -6,7 +6,7 @@
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    environment:
+    env:
       - PORT=81           # comma separated list of ports...or just the one 
       - LABEL=lazytainer     # value of lazytainer.marker for other containers that lazytainer checks
       # - TIMEOUT=30           # OPTIONAL number of seconds to let container idle
