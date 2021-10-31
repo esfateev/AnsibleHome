@@ -3,11 +3,15 @@
     name: pihole
     image: pihole/pihole
     pull: true
+    command: --port 81
+    network_mode: 
+      - service:lazytainer
+    depends_on: 
+      - lazytainer
     ports:
       - "{{ pihole_dns_tcp }}:53/tcp"
       - "{{ pihole_dns_udp }}:53/udp"
       - "{{ pihole_web }}:8212/tcp"
-
     volumes:
       - "{{ pihole_data_directory }}:/etc/pihole/"
 

@@ -11,6 +11,11 @@
     name: flame
     image: pawelmalak/flame:latest
     pull: true
+    command: --port 81
+    network_mode: 
+      - service:lazytainer
+    depends_on: 
+      - lazytainer
     volumes:
       - "{{ flame_data_directory }}:/app/data:rw"
       - "/var/run/docker.sock:/var/run/docker.sock"
@@ -23,3 +28,4 @@
       traefik.frontend.rule: "Host:start.{{ ansible_nas_domain }}"
       traefik.enable: "{{ flame_available_externally }}"
       traefik.port: "5005"
+      lazytainer.marker: "lazytainer"

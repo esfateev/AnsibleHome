@@ -12,6 +12,11 @@
     name: plex
     image: linuxserver/plex
     pull: true
+    command: --port 81
+    network_mode: 
+      - service:lazytainer
+    depends_on: 
+      - lazytainer
     volumes:
       - "{{ plex_config_directory }}:/config:rw"
       - "{{ plex_logs }}:/opt/plex/Library/Application Support/Plex Media Server/Logs:rw"

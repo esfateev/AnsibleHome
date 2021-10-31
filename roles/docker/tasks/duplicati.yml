@@ -11,6 +11,11 @@
     name: duplicati
     image: linuxserver/duplicati
     pull: true
+    command: --port 81
+    network_mode: 
+      - service:lazytainer
+    depends_on: 
+      - lazytainer
     ports:
       - "{{ duplicati_port }}:8200"
     volumes:

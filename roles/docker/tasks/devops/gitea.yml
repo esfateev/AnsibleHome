@@ -31,6 +31,11 @@
     name: gitea-mysql
     image: mysql:5.7
     pull: true
+    command: --port 81
+    network_mode: 
+      - service:lazytainer
+    depends_on: 
+      - lazytainer
     volumes:
       - "{{ gitea_data_directory }}/mysql:/var/lib/mysql:rw"
     env:
@@ -48,6 +53,11 @@
     name: gitea
     image: gitea/gitea:1.6
     pull: true
+    command: --port 81
+    network_mode: 
+      - service:lazytainer
+    depends_on: 
+      - lazytainer
     links:
         - gitea-mysql:db
     volumes:
