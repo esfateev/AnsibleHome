@@ -11,9 +11,6 @@
     name: krusader
     image: djaydev/krusader:latest
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     volumes:
       - "{{ krusader_config_directory }}:/config:rw"
       - "{{ krusader_browse_directory }}:/mnt/fs"
@@ -32,5 +29,4 @@
       traefik.frontend.rule: "Host:krusader.{{ ansible_nas_domain }}"
       traefik.enable: "{{ krusader_available_externally }}"
       traefik.port: "5800"
-      lazytainer.marker: "lazytainer"
     memory: 1g

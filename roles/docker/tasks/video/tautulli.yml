@@ -12,9 +12,6 @@
     name: tautulli
     image: linuxserver/tautulli
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     volumes:
       - "{{ tautulli_config_directory }}:/config:rw"
       - "{{ plex_logs }}:/logs:ro"
@@ -31,4 +28,3 @@
       traefik.frontend.rule: "Host:tautulli.{{ ansible_nas_domain }}"
       traefik.enable: "{{ tautulli_available_externally }}"
       traefik.port: "8181"
-      lazytainer.marker: "lazytainer"

@@ -13,9 +13,6 @@
     name: mysql-semaphore
     image: mysql:5.7
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     volumes:
       - "{{ semaphore_data_directory }}/mysql:/var/lib/mysql:rw"
     ports:
@@ -33,9 +30,6 @@
     name: ansible-semaphore
     image: ansiblesemaphore/semaphore:latest
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     links:
       - mysql-semaphore:db
     volumes:
@@ -60,4 +54,3 @@
       traefik.frontend.rule: "Host:tower.{{ ansible_nas_domain }}"
       traefik.enable: "{{ tower_available_externally }}"
       traefik.port: "3000"
-      lazytainer.marker: "lazytainer"

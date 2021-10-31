@@ -11,9 +11,6 @@
     name: duplicati
     image: linuxserver/duplicati
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     ports:
       - "{{ duplicati_port }}:8200"
     volumes:
@@ -28,4 +25,3 @@
       traefik.frontend.rule: "Host:duplicati.{{ ansible_nas_domain }}"
       traefik.enable: "{{ duplicati_available_externally }}"
       traefik.port: "8200"
-      lazytainer.marker: "lazytainer"

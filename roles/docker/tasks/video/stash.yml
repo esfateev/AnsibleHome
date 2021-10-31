@@ -11,9 +11,6 @@
     name: stash
     image: stashapp/stash:latest
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       ## Keep configs, scrapers, and plugins here.
@@ -43,5 +40,4 @@
       traefik.frontend.rule: "Host:stash.{{ ansible_nas_domain }}"
       traefik.enable: "{{ stash_available_externally }}"
       traefik.port: "9999"
-      lazytainer.marker: "lazytainer"
     dns_servers: "{{ DNS_servers}}"

@@ -3,9 +3,6 @@
     name: pihole
     image: pihole/pihole
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     ports:
       - "{{ pihole_dns_tcp }}:53/tcp"
       - "{{ pihole_dns_udp }}:53/udp"
@@ -25,6 +22,4 @@
       traefik.backend: "pihole"
       traefik.frontend.rule: "Host:pihole.{{ ansible_nas_domain }}"
       traefik.enable: "{{ pihole_available_externally }}"
-      traefik.port: "8212"
-      lazytainer.marker: "lazytainer"
-      
+      traefik.port: "8212"      

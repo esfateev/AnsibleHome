@@ -13,9 +13,6 @@
     name: navidrome
     image: deluan/navidrome:latest
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     volumes:
       - "{{ navidrome_data_directory }}/data:/data:rw"
       - "{{ navidrome_music_directory }}:/music:ro"
@@ -34,5 +31,4 @@
       traefik.frontend.rule: "Host:navidrome.{{ ansible_nas_domain }}"
       traefik.enable: "{{ navidrome_available_externally }}"
       traefik.port: "4533"
-      lazytainer.marker: "lazytainer"
     dns_servers: "{{ DNS_servers}}"

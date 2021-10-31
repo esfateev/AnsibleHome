@@ -2,10 +2,6 @@
   when: (portainer_enabled | default(False))
   tags: portainer
 
-- import_tasks: tasks/docker/lazytainer.yml
-  when: (lazytainer_enabled | default(False))
-  tags: lazytainer
-
 - import_tasks: tasks/docker.yml
   tags: docker
 

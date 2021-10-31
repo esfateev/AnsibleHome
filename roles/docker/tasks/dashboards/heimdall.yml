@@ -29,9 +29,6 @@
     name: heimdall
     image: "{{ heimdall_docker_image }}"
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     volumes:
       - "{{ heimdall_data_directory }}:/config:rw"
     env:
@@ -48,4 +45,3 @@
       traefik.frontend.rule: "Host:heimdall.{{ ansible_nas_domain }}"
       traefik.enable: "{{ heimdall_available_externally }}"
       traefik.port: "80"
-      lazytainer.marker: "lazytainer"

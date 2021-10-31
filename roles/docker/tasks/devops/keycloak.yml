@@ -12,9 +12,6 @@
     name: keycloak
     image: jboss/keycloak:latest
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     volumes:
       - "{{ gitea_data_directory }}/gitea:/data:rw"
     ports:
@@ -29,4 +26,3 @@
       traefik.frontend.rule: "Host:sso.{{ ansible_nas_domain }}"
       traefik.enable: "{{ sso_available_externally }}"
       traefik.port: "443"
-      lazytainer.marker: "lazytainer"

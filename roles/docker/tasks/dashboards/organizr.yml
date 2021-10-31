@@ -5,15 +5,11 @@
     state: directory
   with_items:
     - "{{ organizr_data_directory }}"
-
 - name: Create Organizr container
   docker_container:
     name: organizr
     image: organizrtools/organizr-v2:latest
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     volumes:
       - "{{ organizr_data_directory }}:/config:rw"
     env:
@@ -30,4 +26,3 @@
       traefik.frontend.rule: "Host:organizr.{{ ansible_nas_domain }}"
       traefik.enable: "{{ organizr_available_externally }}"
       traefik.port: "80"
-      lazytainer.marker: "lazytainer"

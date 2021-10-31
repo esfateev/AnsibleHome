@@ -19,9 +19,6 @@
     name: wiki
     image: requarks/wiki
     pull: true
-    command: --port 81
-    network_mode: 
-      - service:lazytainer
     ports:
       - "{{ wiki_port }}:3000"
     env:
@@ -38,4 +35,3 @@
       traefik.frontend.rule: "Host:wiki.{{ ansible_nas_domain }}"
       traefik.enable: "{{ wiki_available_externally }}"
       traefik.port: "3000"
-      lazytainer.marker: "lazytainer"
