@@ -58,6 +58,7 @@ stats_enabled: false
 guacamole_enabled: false
 netdata_enabled: false
 watchtower_enabled: true
+lazytainer_enabled: true
 cloudflare_ddns_enabled: false
 cloudcmd_enabled: false
 virtual_desktop_enabled: false
@@ -516,6 +517,12 @@ watchtower_command: "--cleanup --schedule '{{ watchtower_cron_schedule }}'"
 # watchtower_slack_url
 # watchtower_slack_id
 # watchtower_slack_channel
+
+###
+### lazytainer
+###
+lazytainer_available_externally: "true"
+lazytainer_port_http: "81"
 
 ###
 ### Tautulli

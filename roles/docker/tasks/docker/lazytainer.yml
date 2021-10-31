@@ -1,0 +1,22 @@
+---
+- name: Create Lazytainer Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+
+- name: Create Lazytainer container
+  docker_container:
+    name: lazytainer
+    image: ghcr.io/vmorganp/lazytainer:master
+    pull: true
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    ports:
+      - "{{ lazytainer_port_http }}:81"
+    restart_policy: unless-stopped
+    memory: 1g
+    labels:
+      traefik.backend: "lazytainer"
+      traefik.frontend.rule: "Host:lazytainer.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ lazytainer_available_externally }}"
+      traefik.port: "81"
