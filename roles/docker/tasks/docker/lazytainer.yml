@@ -1,20 +1,19 @@
 ---
 - name: Create Lazytainer container
-  docker_service:
-    project_name: lazytainer
-    definition:
-      lazytainer: 
+  docker_compose:
+    version: "3"
+    services:
+      lazytainer:
+        container_name: lazytainer
         image: ghcr.io/vmorganp/lazytainer:master
-        pull: true
-        volumes:
-          - "/var/run/docker.sock:/var/run/docker.sock:ro"
-        env:
-          PORT: "81"           # comma separated list of ports...or just the one 
-          LABEL: "lazytainer"     # value of lazytainer.marker for other containers that lazytainer checks
-          # TIMEOUT: 30           # OPTIONAL number of seconds to let container idle
-          # MINPACKETTHRESH: 10   # OPTIONAL number of packets that must be recieved to keepalive/start container 
-          # POLLRATE: 1           # OPTIONAL number of seconds to sleep between polls
-          # VERBOSE: true         # probably set this to false unless you're debugging or doing the initial demo
+        environment:
+          - PORT=81,82           # comma separated list of ports...or just the one 
+          - LABEL=lazytainer     # value of lazytainer.marker for other containers that lazytainer checks
+          - TIMEOUT=30           # OPTIONAL number of seconds to let container idle
+          - MINPACKETTHRESH=10   # OPTIONAL number of packets that must be recieved to keepalive/start container 
+          - POLLRATE=1           # OPTIONAL number of seconds to sleep between polls
+          - VERBOSE=true         # probably set this to false unless you're debugging or doing the initial demo
         ports:
-          - "{{ lazytainer_port_http }}:81"
-        restart_policy: unless-stopped
+          - 81:81
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock:ro
