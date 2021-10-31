@@ -14,8 +14,6 @@
     command: --port 81
     network_mode: 
       - service:lazytainer
-    depends_on: 
-      - lazytainer
     volumes:
       - "{{ jellyfin_config_directory }}:/config:rw"
       - "{{ jellyfin_movies_directory }}:/movies:{{ jellyfin_movies_permissions }}"

@@ -14,8 +14,6 @@
     command: --port 81
     network_mode: 
       - service:lazytainer
-    depends_on: 
-      - lazytainer
     volumes:
       - "{{ organizr_data_directory }}:/config:rw"
     env:

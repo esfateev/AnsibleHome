@@ -16,8 +16,6 @@
     command: --port 81
     network_mode: 
       - service:lazytainer
-    depends_on: 
-      - lazytainer
     volumes:
       - "{{ semaphore_data_directory }}/mysql:/var/lib/mysql:rw"
     ports:
@@ -38,8 +36,6 @@
     command: --port 81
     network_mode: 
       - service:lazytainer
-    depends_on: 
-      - lazytainer
     links:
       - mysql-semaphore:db
     volumes:

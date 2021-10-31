@@ -34,8 +34,6 @@
     command: --port 81
     network_mode: 
       - service:lazytainer
-    depends_on: 
-      - lazytainer
     volumes:
       - "{{ gitea_data_directory }}/mysql:/var/lib/mysql:rw"
     env:
@@ -56,8 +54,6 @@
     command: --port 81
     network_mode: 
       - service:lazytainer
-    depends_on: 
-      - lazytainer
     links:
         - gitea-mysql:db
     volumes:
