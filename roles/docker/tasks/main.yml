@@ -1,14 +1,13 @@
-- import_tasks: tasks/docker.yml
-  tags: docker
-
+- import_tasks: tasks/docker/lazytainer.yml
+  when: (lazytainer_enabled | default(False))
+  tags: lazytainer
+  
 - import_tasks: tasks/portainer.yml
   when: (portainer_enabled | default(False))
   tags: portainer
 
-- import_tasks: tasks/docker/lazytainer.yml
-  when: (lazytainer_enabled | default(False))
-  tags: lazytainer
-
+- import_tasks: tasks/docker.yml
+  tags: docker
 
 - import_tasks: tasks/docker/watchtower.yml
   when: (watchtower_enabled | default(False))
