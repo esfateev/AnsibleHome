@@ -1,9 +1,4 @@
 ---
-- name: Create Lazytainer Directories
-  file:
-    path: "{{ item }}"
-    state: directory
-
 - name: Create Lazytainer container
   docker_container:
     name: lazytainer
