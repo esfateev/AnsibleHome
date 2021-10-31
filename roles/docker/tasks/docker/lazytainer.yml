@@ -8,7 +8,7 @@
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     env:
       PORT: "81"           # comma separated list of ports...or just the one 
-      LABEL: "lazytainer:     # value of lazytainer.marker for other containers that lazytainer checks
+      LABEL: "lazytainer"     # value of lazytainer.marker for other containers that lazytainer checks
       # TIMEOUT: 30           # OPTIONAL number of seconds to let container idle
       # MINPACKETTHRESH: 10   # OPTIONAL number of packets that must be recieved to keepalive/start container 
       # POLLRATE: 1           # OPTIONAL number of seconds to sleep between polls
