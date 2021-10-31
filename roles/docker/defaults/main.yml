@@ -51,6 +51,7 @@ miniflux_enabled: false
 pihole_enabled: false
 heimdall_enabled: true
 organizr_enabled: false
+flame_enabled: true
 portainer_enabled: true
 glances_enabled: true
 stats_enabled: false
@@ -425,6 +426,13 @@ organizr_port_http: "10081"
 organizr_port_https: "10444"
 organizr_user_id: "1000"
 organizr_group_id: "1000"
+
+###
+### Flame
+###
+flame_available_externally: "true"
+flame_data_directory: "{{ docker_home }}/flame"
+flame_port_http: "5005"
 
 ###
 ### Transmission

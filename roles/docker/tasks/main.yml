@@ -21,13 +21,17 @@
   when: (stats_enabled | default(False))
   tags: stats
 
-- import_tasks: tasks/heimdall.yml
+- import_tasks: tasks/dashboards/heimdall.yml
   when: (heimdall_enabled | default(False))
   tags: heimdall
 
-- import_tasks: tasks/organizr.yml
+- import_tasks: tasks/dashboards/organizr.yml
   when: (organizr_enabled | default(False))
   tags: organizr
+
+- import_tasks: tasks/dashboards/flame.yml
+  when: (flame_enabled | default(False))
+  tags: flame
 
 - import_tasks: tasks/wiki.yml
   when: (wiki_enabled | default(False))

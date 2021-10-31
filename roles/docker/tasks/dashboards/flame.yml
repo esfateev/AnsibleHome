@@ -1,0 +1,25 @@
+---
+- name: Create Flame Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ flame_data_directory }}"
+
+- name: Create Flame container
+  docker_container:
+    name: flame
+    image: pawelmalak/flame:latest
+    pull: true
+    volumes:
+      - "{{ flame_data_directory }}:/app/data:rw"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    ports:
+      - "{{ flame_port_http }}:5005"
+    restart_policy: unless-stopped
+    memory: 1g
+    labels:
+      traefik.backend: "flame"
+      traefik.frontend.rule: "Host:start.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ flame_available_externally }}"
+      traefik.port: "5005"
