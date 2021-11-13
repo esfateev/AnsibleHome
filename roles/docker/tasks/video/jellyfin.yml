@@ -32,4 +32,7 @@
       traefik.frontend.rule: "Host:jellyfin.{{ ansible_nas_domain }}"
       traefik.enable: "{{ jellyfin_available_externally }}"
       traefik.port: "8096"
+      flame.type: "Media"
+      flame.name: "Jellyfin"
+      flame.url: "https://jellyfin.fes.lan"
     dns_servers: "{{ DNS_servers}}"

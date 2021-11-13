@@ -32,3 +32,6 @@
       traefik.frontend.rule: "Host:plex.{{ ansible_nas_domain }}"
       traefik.enable: "{{ plex_available_externally }}"
       traefik.port: "32400"
+      flame.type: "Media"
+      flame.name: "Plex"
+      flame.url: "https://plex.fes.lan"

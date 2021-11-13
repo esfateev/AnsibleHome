@@ -22,4 +22,7 @@
       traefik.backend: "pihole"
       traefik.frontend.rule: "Host:pihole.{{ ansible_nas_domain }}"
       traefik.enable: "{{ pihole_available_externally }}"
-      traefik.port: "8212"      
+      traefik.port: "8212"
+      flame.type: "Tools"
+      flame.name: "Pi-Hole - DNS service"
+      flame.url: "https://pihole.fes.lan"

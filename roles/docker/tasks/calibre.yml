@@ -26,5 +26,8 @@
       traefik.frontend.rule: "Host:calibre.{{ ansible_nas_domain }}"
       traefik.enable: "{{ calibre_available_externally }}"
       traefik.port: "8083"
+      flame.type: "Media"
+      flame.name: "Calibre Web"
+      flame.url: "https://calibre.fes.lan"
     memory: 1g
     dns_servers: "{{ DNS_servers}}"

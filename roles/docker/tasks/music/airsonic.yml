@@ -27,3 +27,6 @@
       traefik.frontend.rule: "Host:music.{{ ansible_nas_domain }}"
       traefik.enable: "{{ airsonic_available_externally }}"
       traefik.port: "4040"
+      flame.type: "Music"
+      flame.name: "airsonic"
+      flame.url: "https://music.fes.lan"

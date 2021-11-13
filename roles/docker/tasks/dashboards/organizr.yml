@@ -26,3 +26,7 @@
       traefik.frontend.rule: "Host:organizr.{{ ansible_nas_domain }}"
       traefik.enable: "{{ organizr_available_externally }}"
       traefik.port: "80"
+      flame.type: "dashboards"
+      flame.name: "Organizr"
+      flame.url: "https://organizr.fes.lan"
+      #flame.icon=custom to make changes in app. ie: custom icon upload

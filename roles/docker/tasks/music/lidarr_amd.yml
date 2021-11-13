@@ -26,4 +26,7 @@
       traefik.frontend.rule: "Host:lidarr.{{ ansible_nas_domain }}"
       traefik.enable: "{{ lidarr_available_externally }}"
       traefik.port: "8686"
+      flame.type: "Music"
+      flame.name: "Lidarr"
+      flame.url: "https://lidarr.fes.lan"
     dns_servers: "{{ DNS_servers}}"

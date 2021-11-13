@@ -28,4 +28,7 @@
       traefik.frontend.rule: "Host:radarr.{{ ansible_nas_domain }}"
       traefik.enable: "{{ radarr_available_externally }}"
       traefik.port: "7878"
+      flame.type: "Media"
+      flame.name: "Radarr"
+      flame.url: "https://radarr.fes.lan"
     dns_servers: "{{ DNS_servers}}"

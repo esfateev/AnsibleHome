@@ -1,7 +1,7 @@
 - import_tasks: tasks/docker.yml
   tags: docker
 
-- import_tasks: tasks/portainer.yml
+- import_tasks: tasks/devops/portainer.yml
   when: (portainer_enabled | default(False))
   tags: portainer
 
@@ -13,11 +13,11 @@
   when: (traefik_enabled | default(False))
   tags: traefik
 
-- import_tasks: tasks/pihole.yml
+- import_tasks: tasks/tools/pihole.yml
   when: (pihole_enabled | default(False))
   tags: pihole
 
-- import_tasks: tasks/stats.yml
+- import_tasks: tasks/devops/stats.yml
   when: (stats_enabled | default(False))
   tags: stats
 
@@ -52,10 +52,6 @@
 - import_tasks: tasks/calibre.yml
   when: (calibre_enabled | default(False))
   tags: calibre
-
-- import_tasks: tasks/glances.yml
-  when: (glances_enabled | default(False))
-  tags: glances
 
 - import_tasks: tasks/krusader.yml
   when: (krusader_enabled | default(False))
@@ -98,6 +94,10 @@
 - import_tasks: tasks/devops/ansible-semaphore.yml
   when: (ansible_semaphore_enabled | default(False))
   tags: ansible-semaphore
+
+- import_tasks: tasks/devops/glances.yml
+  when: (glances_enabled | default(False))
+  tags: glances
 
 ##############  Music #################
 #######################################

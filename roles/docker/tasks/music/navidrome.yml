@@ -31,4 +31,7 @@
       traefik.frontend.rule: "Host:navidrome.{{ ansible_nas_domain }}"
       traefik.enable: "{{ navidrome_available_externally }}"
       traefik.port: "4533"
+      flame.type: "Music"
+      flame.name: "Navidrome"
+      flame.url: "https://navidrome.fes.lan"
     dns_servers: "{{ DNS_servers}}"

@@ -40,4 +40,7 @@
       traefik.frontend.rule: "Host:stash.{{ ansible_nas_domain }}"
       traefik.enable: "{{ stash_available_externally }}"
       traefik.port: "9999"
+      flame.type: "Media"
+      flame.name: "Stash"
+      flame.url: "https://stash.fes.lan"
     dns_servers: "{{ DNS_servers}}"

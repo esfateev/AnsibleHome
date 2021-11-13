@@ -20,6 +20,9 @@
     memory: 1g
     labels:
       traefik.backend: "flame"
-      traefik.frontend.rule: "Host:start.{{ ansible_nas_domain }}"
+      traefik.frontend.rule: "Host:main.{{ ansible_nas_domain }}"
       traefik.enable: "{{ flame_available_externally }}"
       traefik.port: "5005"
+      flame.type: "dashboards"
+      flame.name: "Flame"
+      flame.url: "https://main.fes.lan"

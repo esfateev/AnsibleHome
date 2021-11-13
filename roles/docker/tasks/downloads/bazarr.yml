@@ -28,4 +28,7 @@
       traefik.frontend.rule: "Host:bazarr.{{ ansible_nas_domain }}"
       traefik.enable: "{{ bazarr_available_externally }}"
       traefik.port: "6767"
+      flame.type: "Downloads"
+      flame.name: "Bazarr"
+      flame.url: "https://bazarr.fes.lan"
     dns_servers: "{{ DNS_servers}}"

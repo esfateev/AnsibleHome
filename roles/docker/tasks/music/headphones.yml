@@ -25,4 +25,7 @@
       traefik.frontend.rule: "Host:headphones.{{ ansible_nas_domain }}"
       traefik.enable: "{{ headphones_available_externally }}"
       traefik.port: "8181"
+      flame.type: "Music"
+      flame.name: "Headphones"
+      flame.url: "https://headphones.fes.lan"
     dns_servers: "{{ DNS_servers}}"

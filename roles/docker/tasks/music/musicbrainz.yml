@@ -25,4 +25,7 @@
       traefik.frontend.rule: "Host:musicbrainz.{{ ansible_nas_domain }}"
       traefik.enable: "{{ musicbrainz_available_externally }}"
       traefik.port: "443"
+      flame.type: "Music"
+      flame.name: "Musicbrainz"
+      flame.url: "https://musicbrainz.fes.lan"
     dns_servers: "{{ DNS_servers}}"

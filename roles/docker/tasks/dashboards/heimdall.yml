@@ -45,3 +45,7 @@
       traefik.frontend.rule: "Host:heimdall.{{ ansible_nas_domain }}"
       traefik.enable: "{{ heimdall_available_externally }}"
       traefik.port: "80"
+      flame.type: "dashboards" # "app" works too
+      flame.name: "Heimdall"
+      flame.url: "https://heimdall.fes.lan"
+      #flame.icon=custom to make changes in app. ie: custom icon upload

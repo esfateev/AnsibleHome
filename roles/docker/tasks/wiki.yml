@@ -35,3 +35,6 @@
       traefik.frontend.rule: "Host:wiki.{{ ansible_nas_domain }}"
       traefik.enable: "{{ wiki_available_externally }}"
       traefik.port: "3000"
+      flame.type: "Tools"
+      flame.name: "Wiki JS"
+      flame.url: "https://wiki.fes.lan"

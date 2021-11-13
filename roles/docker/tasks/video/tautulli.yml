@@ -28,3 +28,6 @@
       traefik.frontend.rule: "Host:tautulli.{{ ansible_nas_domain }}"
       traefik.enable: "{{ tautulli_available_externally }}"
       traefik.port: "8181"
+      flame.type: "Media"
+      flame.name: "Tautulli"
+      flame.url: "https://tautulli.fes.lan"

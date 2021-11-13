@@ -54,3 +54,6 @@
       traefik.frontend.rule: "Host:tower.{{ ansible_nas_domain }}"
       traefik.enable: "{{ tower_available_externally }}"
       traefik.port: "3000"
+      flame.type: "devops"
+      flame.name: "Ansible Semaphore"
+      flame.url: "https://tower.fes.lan"

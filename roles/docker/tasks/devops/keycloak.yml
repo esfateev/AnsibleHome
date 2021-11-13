@@ -26,3 +26,6 @@
       traefik.frontend.rule: "Host:sso.{{ ansible_nas_domain }}"
       traefik.enable: "{{ sso_available_externally }}"
       traefik.port: "443"
+      flame.type: "devops"
+      flame.name: "Keycloak"
+      flame.url: "https://sso.fes.lan"
