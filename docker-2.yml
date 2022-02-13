@@ -1,0 +1,5 @@
+- hosts: docker
+  gather_facts: no
+  become: yes
+  roles: 
+  - { role: roles/docker }
