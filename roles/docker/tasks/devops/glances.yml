@@ -21,3 +21,6 @@
       traefik.frontend.rule: "Host:glances.{{ ansible_nas_domain }}"
       traefik.enable: "{{ glances_available_externally }}"
       traefik.port: "61208"
+      flame.type: "Devops"
+      flame.name: "Glances"
+      flame.url: "https://glances.fes.lan"

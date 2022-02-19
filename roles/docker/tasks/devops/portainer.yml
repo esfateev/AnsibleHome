@@ -24,3 +24,6 @@
       traefik.frontend.rule: "Host:portainer.{{ ansible_nas_domain }}"
       traefik.enable: "{{ portainer_available_externally }}"
       traefik.port: "9000"
+      flame.type: "devops"
+      flame.name: "Portainer"
+      flame.url: "https://portainer.fes.lan"

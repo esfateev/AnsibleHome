@@ -113,4 +113,7 @@
       traefik.frontend.rule: "Host:grafana.{{ ansible_nas_domain }}"
       traefik.enable: "{{ grafana_available_externally }}"
       traefik.port: "3004"
+      flame.type: "devops"
+      flame.name: "Grafana"
+      flame.url: "https://grafana.fes.lan"
     dns_servers: "{{ DNS_servers}}"
