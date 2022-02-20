@@ -1,7 +1,5 @@
 - hosts: docker
   gather_facts: yes
   become: yes
-  become_method: su
-  ansible_become_user: ansible
   roles: 
   - { role: roles/docker }
