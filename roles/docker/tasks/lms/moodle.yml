@@ -1,0 +1,51 @@
+---
+- name: Create Moodle Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ moodle_data_directory }}"
+    - "{{ moodle_data_directory }}/data"
+    - "{{ moodle_data_directory }}/db"
+
+- name: Create MariaDB container for Moodle
+  docker_container:
+    name: mariadb-moodle
+    image: bitnami/mariadb:latest
+    pull: true
+    volumes:
+      - "{{ moodle_data_directory }}/db:/bitnami/mariadb:rw"
+    network: moodle-network
+    env:
+      ALLOW_EMPTY_PASSWORD: "yes"
+      MARIADB_USER: "bn_moodle"
+      MARIADB_PASSWORD: "{{ moodle_db_password }}"
+      MARIADB_DATABASE: "bitnami_moodle"
+    restart_policy: unless-stopped
+    memory: 1g
+
+- name: Moodle Docker Container
+  docker_container:
+    name: moodle
+    image: bitnami/moodle:latest
+    pull: true
+    volumes:
+      - "{{ moodle_data_directory }}/data:/bitnami/moodle:rw"
+    ports:
+      - "{{ moodle_port_https }}:8443"
+    restart_policy: unless-stopped
+    memory: 1g
+    env:
+      ALLOW_EMPTY_PASSWORD: "yes"
+      MOODLE_DATABASE_USER: "bn_moodle"
+      MOODLE_DATABASE_PASSWORD: "{{ moodle_db_password }}"
+      MOODLE_DATABASE_NAME: "bitnami_moodle"
+    network: moodle-network
+    labels:
+      traefik.backend: "lms"
+      traefik.frontend.rule: "Host:lms.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ moodle_available_externally }}"
+      traefik.port: "{{ moodle_port_https }}"
+      flame.type: "Other"
+      flame.name: "Mooble LMS"
+      flame.url: "https://lms.fes.lan"
