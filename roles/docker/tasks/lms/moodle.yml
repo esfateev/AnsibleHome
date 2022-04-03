@@ -15,7 +15,8 @@
     pull: true
     volumes:
       - "{{ moodle_data_directory }}/db:/bitnami/mariadb:rw"
-    network: moodle-network
+    networks: 
+      - name: "moodle-network"
     env:
       ALLOW_EMPTY_PASSWORD: "yes"
       MARIADB_USER: "bn_moodle"
@@ -40,7 +41,8 @@
       MOODLE_DATABASE_USER: "bn_moodle"
       MOODLE_DATABASE_PASSWORD: "{{ moodle_db_password }}"
       MOODLE_DATABASE_NAME: "bitnami_moodle"
-    network: moodle-network
+    networks: 
+      - name: "moodle-network"
     labels:
       traefik.backend: "lms"
       traefik.frontend.rule: "Host:lms.{{ ansible_nas_domain }}"
