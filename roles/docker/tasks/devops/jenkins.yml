@@ -1,0 +1,28 @@
+---
+- name: Create Jenkins Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ jenkins_data_directory }}"
+
+- name: Jenkins Docker Container
+  docker_container:
+    name: jenkins
+    image: jenkins/jenkins:lts
+    pull: true
+    volumes:
+      - "{{ jenkins_data_directory }}:/var/jenkins_home:rw"
+    ports:
+      - "{{ jenkins_port }}:8080"
+      - "{{ jenkins_cluster_port }}:50000"
+    restart_policy: unless-stopped
+    memory: 1g
+    labels:
+      traefik.backend: "jenkins"
+      traefik.frontend.rule: "Host:jenkins.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ jenkins_available_externally }}"
+      traefik.port: "8881"
+      flame.type: "devops"
+      flame.name: "Jenkins"
+      flame.url: "https://jenkins.fes.lan"

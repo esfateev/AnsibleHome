@@ -1,6 +1,10 @@
 - import_tasks: tasks/docker.yml
   tags: docker
 
+- import_tasks: tasks/lms/moodle.yml
+  when: (moodle_enabled | default(False))
+  tags: moodle
+
 - import_tasks: tasks/devops/portainer.yml
   when: (portainer_enabled | default(False))
   tags: portainer
@@ -98,6 +102,10 @@
 - import_tasks: tasks/devops/glances.yml
   when: (glances_enabled | default(False))
   tags: glances
+
+- import_tasks: tasks/devops/jenkins.yml
+  when: (jenkins_enabled | default(False))
+  tags: jenkins
 
 ##############  Music #################
 #######################################

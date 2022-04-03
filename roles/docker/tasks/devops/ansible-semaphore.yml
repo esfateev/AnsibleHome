@@ -33,13 +33,14 @@
     links:
       - mysql-semaphore:db
     volumes:
-      - "{{ semaphore_data_directory }}/semaphore:/etc/semaphore/:rw"
+      - "{{ semaphore_data_directory }}/etc/semaphore:/etc/semaphore/:rw"
+      - "{{ semaphore_data_directory }}/home/semaphore/.ssh/known_hosts:/home/semaphore/.ssh/known_hosts:rw"
     ports:
       - "{{ semaphore_port_http }}:3000"
     env:
-      SEMAPHORE_ADMIN: "admin"
+      SEMAPHORE_ADMIN: "fes"
       SEMAPHORE_ADMIN_EMAIL: "esfateev@gmail.com"
-      SEMAPHORE_ADMIN_NAME: "admin"
+      SEMAPHORE_ADMIN_NAME: "fes"
       SEMAPHORE_ADMIN_PASSWORD: "{{ semaphore_admin_password }}"
       SEMAPHORE_DB: "semaphore"
       SEMAPHORE_DB_HOST: "db"
